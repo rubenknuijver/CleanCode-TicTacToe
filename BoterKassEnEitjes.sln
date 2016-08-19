@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BKE.WindowsForms", "BKE.WindowsForms\BKE.WindowsForms.csproj", "{F3A7FB5C-5A30-4306-84EF-AD82E988A75B}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BKE.AllTogether", "BKE.AllTogether\BKE.AllTogether.csproj", "{5489BF05-72E1-4FB7-828F-FCC34E7B3410}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BKE.AllTogether.Tests", "BKE.AllTogether.Tests\BKE.AllTogether.Tests.csproj", "{216FAA55-C1D4-4AA8-B6AF-851EC6D5D4C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DE67649D-CA9B-4AF1-B5BF-0C20F0FC99EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary", "GameLibrary\GameLibrary.csproj", "{135D13D2-8AD6-42A9-AD72-A43A737FB973}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,11 +35,16 @@ Global
 		{216FAA55-C1D4-4AA8-B6AF-851EC6D5D4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{216FAA55-C1D4-4AA8-B6AF-851EC6D5D4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{216FAA55-C1D4-4AA8-B6AF-851EC6D5D4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{135D13D2-8AD6-42A9-AD72-A43A737FB973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{135D13D2-8AD6-42A9-AD72-A43A737FB973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{135D13D2-8AD6-42A9-AD72-A43A737FB973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{135D13D2-8AD6-42A9-AD72-A43A737FB973}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{216FAA55-C1D4-4AA8-B6AF-851EC6D5D4C0} = {D0AFF4F7-256A-413A-AB5C-75C97C898BF2}
+		{135D13D2-8AD6-42A9-AD72-A43A737FB973} = {DE67649D-CA9B-4AF1-B5BF-0C20F0FC99EE}
 	EndGlobalSection
 EndGlobal
