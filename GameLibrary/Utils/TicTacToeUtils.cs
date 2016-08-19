@@ -27,7 +27,7 @@ namespace GameLibrary.Utils
             new int[][]  {new int[]{0} ,new int[]{4,8,6,2}}
         };
 
-        public static bool CheckAndProcessWinner(Cell[] cells)
+        public static bool CheckForGameover(Cell[] cells)
         {
             bool gameOver = false;
             for (int i = 0; i < 8; i++) {

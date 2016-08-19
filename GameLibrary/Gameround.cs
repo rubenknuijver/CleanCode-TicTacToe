@@ -1,3 +1,4 @@
+using GameLibrary.Gamer;
 using GameLibrary.Utils;
 using System;
 using System.Collections.Generic;
@@ -7,10 +8,35 @@ namespace GameLibrary
 {
     public class Gameround
     {
-        public CommandManager TurnStack { get; set; }
+        private readonly RoundRobinList<Player> _players;
 
-        public Gamer.Player CurrentPlayer { get; set; }
+        public CommandManager TurnStack { get; } = new CommandManager();
 
-        public Gamer.Player Winner { get; set; }
+        public Player CurrentPlayer
+        {
+            get;
+            protected set;
+        }
+
+        public Player Winner
+        {
+            get;
+            protected set;
+        }
+
+        public Gameround(Player[] players)
+        {
+            _players = new RoundRobinList<Player>(players);
+        }
+
+        public Gameround(IEnumerable<Player> players)
+        {
+            _players = new RoundRobinList<Player>(players);
+        }
+
+        public void Start()
+        {
+            CurrentPlayer = _players.First();
+        }
     }
 }

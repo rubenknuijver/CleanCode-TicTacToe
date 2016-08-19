@@ -1,4 +1,5 @@
-﻿using GameLibrary.Utils;
+﻿using GameLibrary.Gamer;
+using GameLibrary.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,37 @@ namespace GameLibrary
 {
     public class Game
     {
-        public Gameround CurrentRound { get; set; }
+        private HashSet<Player> _players = new HashSet<Player>();
 
-        public Gamer.Player PlayerA { get; set; }
-
-        public Gamer.Player PlayerB { get; set; }
-
-        public Game()
+        public Gameround CurrentRound
         {
+            get;
+            protected set;
+        }
 
+        public IReadOnlyCollection<Player> Players
+        {
+            get { return _players; }
+        }
+
+        public int MaxPlayers { get; }
+
+        public Game(int maxPlayers = 2)
+        {
+            this.MaxPlayers = maxPlayers;
+        }
+
+        public void RegisterPlayer(Player player)
+        {
+            if (Players.Count == MaxPlayers)
+                throw new PlayerMaximumException(MaxPlayers);
+
+            _players.Add(player);
+        }
+
+        public void StartNew()
+        {
+            CurrentRound = new Gameround(Players.ToArray());
         }
     }
 }

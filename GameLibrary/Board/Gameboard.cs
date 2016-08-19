@@ -8,6 +8,6 @@ namespace GameLibrary.Board
 {
     public class Gameboard
     {
-        public Grid Grid { get; } = new Grid();
+        public Grid Grid { get; } = new Grid(3, 3);
     }
 }

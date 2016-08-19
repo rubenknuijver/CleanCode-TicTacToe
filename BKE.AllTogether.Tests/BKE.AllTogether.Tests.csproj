@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BKE.AllTogether.Tests</RootNamespace>
     <AssemblyName>BKE.AllTogether.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -61,7 +61,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ArtificialIntelligencePlayerTests.cs" />
+    <Compile Include="GameTests.cs" />
+    <Compile Include="GridTests.cs" />
+    <Compile Include="HumanPlayerTests.cs" />
     <Compile Include="MockVoorbeeldMetDecorator.cs" />
+    <Compile Include="PlayerBaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

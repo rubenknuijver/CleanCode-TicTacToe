@@ -6,5 +6,10 @@ namespace GameLibrary.Gamer
 {
     public class HumanPlayer : Player
     {
+        public HumanPlayer(string name)
+            : base(name)
+        {
+            
+        }
     }
 }
