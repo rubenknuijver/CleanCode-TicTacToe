@@ -6,7 +6,13 @@ namespace GameLibrary.Gamer
 {
     public class ArtificialIntelligencePlayer : Player
     {
-        public ArtificialIntelligencePlayer(int count = 1)
+        private static int _count = 1;
+
+        public ArtificialIntelligencePlayer()
+            :this(_count++)
+        {
+        }
+        protected ArtificialIntelligencePlayer(int count)
             : base($"Computer {count}")
         {
         }

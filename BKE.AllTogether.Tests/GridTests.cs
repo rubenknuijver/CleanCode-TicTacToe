@@ -31,7 +31,7 @@ namespace BKE.AllTogether.Tests
             Grid grid = new Grid(3, 3);
             grid.Initialize();
 
-            grid[2, 2].Taken = new HumanPlayer("John Dow");
+            grid[2, 2].Owner = new HumanPlayer("John Dow");
 
             int cellsThatAreNotTaken = grid.AsEnumerable()
                 .AllEmpty()

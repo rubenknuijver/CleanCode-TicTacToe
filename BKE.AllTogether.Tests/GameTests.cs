@@ -33,5 +33,15 @@ namespace BKE.AllTogether.Tests
             game.RegisterPlayer(new ArtificialIntelligencePlayer());
             game.RegisterPlayer(new ArtificialIntelligencePlayer());
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(DuplicatePlayerException))]
+        public void Register_Player_Thows_On_DuplicatePlayer()
+        {
+            Game game = new Game(2);
+
+            game.RegisterPlayer(new HumanPlayer("John Dow"));
+            game.RegisterPlayer(new HumanPlayer("John Dow"));
+        }
     }
 }

@@ -35,6 +35,9 @@ namespace GameLibrary
             if (Players.Count == MaxPlayers)
                 throw new PlayerMaximumException(MaxPlayers);
 
+            if (_players.Contains(player))
+                throw new DuplicatePlayerException(player);
+
             _players.Add(player);
         }
 

@@ -45,6 +45,7 @@
     <Compile Include="Board\Gameboard.cs" />
     <Compile Include="Board\Grid.cs" />
     <Compile Include="Board\GridExtensions.cs" />
+    <Compile Include="DuplicatePlayerException.cs" />
     <Compile Include="Gamer\PlayerTurn.cs" />
     <Compile Include="Gamer\ArtificialIntelligencePlayer.cs" />
     <Compile Include="Gamer\HumanPlayer.cs" />

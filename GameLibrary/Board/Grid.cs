@@ -1,3 +1,4 @@
+using GameLibrary.Gamer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,6 +40,13 @@ namespace GameLibrary.Board
             for (int n = 0; n < _rowSize * _columnSize; n++) {
                 _cells[n] = Cell.Create(n);
             }
+        }
+
+        public void OcupyCell(Player player, int y, int x)
+        {
+            var cell = this[y, x];
+            if(cell.IsEmpty)
+            cell.Owner = player;
         }
     }
 }

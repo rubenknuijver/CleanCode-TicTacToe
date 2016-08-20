@@ -12,7 +12,7 @@ namespace GameLibrary
 
         public CommandManager TurnStack { get; } = new CommandManager();
 
-        public Player CurrentPlayer
+        public IPlayerTurn CurrentPlayer
         {
             get;
             protected set;
@@ -36,7 +36,7 @@ namespace GameLibrary
 
         public void Start()
         {
-            CurrentPlayer = _players.First();
+            CurrentPlayer = new PlayerTurn(_players.First());
         }
     }
 }

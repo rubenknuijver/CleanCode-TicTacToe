@@ -7,23 +7,23 @@ namespace GameLibrary.Board
 {
     public class Cell
     {
-        public int Index { get; }
+        public int Score { get; }
 
-        public Player Taken { get; set; } = null;
+        public Player Owner { get; set; } = null;
 
         public bool IsEmpty
         {
-            get { return Taken == null; }
+            get { return Owner == null; }
         }
 
-        public Cell(int index)
+        public Cell(int score)
         {
-            Index = index;
+            Score = score;
         }
 
-        public static Cell Create(int index)
+        public static Cell Create(int score)
         {
-            return new Cell(index);
+            return new Cell(score);
         }
     }
 }

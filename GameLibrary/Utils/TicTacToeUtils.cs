@@ -39,10 +39,10 @@ namespace GameLibrary.Utils
                     b2 = cells[b],
                     b3 = cells[c];
 
-                if (b1.Taken == null || b2.Taken == null || b3.Taken == null) // if one if blank
+                if (b1.Owner == null || b2.Owner == null || b3.Owner == null) // if one if blank
                     continue;    // try another -- no need to go further
 
-                if (b1.Taken == b2.Taken && b2.Taken == b3.Taken) {
+                if (b1.Owner == b2.Owner && b2.Owner == b3.Owner) {
                     gameOver = true;
                     break;  // don't bother to continue
                 }
