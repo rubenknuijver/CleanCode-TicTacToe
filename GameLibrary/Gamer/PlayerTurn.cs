@@ -33,12 +33,17 @@ namespace GameLibrary.Gamer
 
         public void Execute()
         {
-
+            Take();
         }
 
         public void Undo()
         {
 
+        }
+
+        public void Take()
+        {
+            
         }
     }
 }

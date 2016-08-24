@@ -12,7 +12,7 @@ namespace GameLibrary
     {
         private HashSet<Player> _players = new HashSet<Player>();
 
-        public Gameround CurrentRound
+        public GameRound CurrentRound
         {
             get;
             protected set;
@@ -43,7 +43,7 @@ namespace GameLibrary
 
         public void StartNew()
         {
-            CurrentRound = new Gameround(Players.ToArray());
+            CurrentRound = new GameRound(Players.ToArray());
         }
     }
 }

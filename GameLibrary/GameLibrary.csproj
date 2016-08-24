@@ -41,17 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Board\BoardCoordinate.cs" />
     <Compile Include="Board\Cell.cs" />
-    <Compile Include="Board\Gameboard.cs" />
-    <Compile Include="Board\Grid.cs" />
-    <Compile Include="Board\GridExtensions.cs" />
+    <Compile Include="Board\GameBoard.cs" />
+    <Compile Include="Board\GameBoardExtensions.cs" />
     <Compile Include="DuplicatePlayerException.cs" />
+    <Compile Include="Gamer\Class1.cs" />
+    <Compile Include="Gamer\IInputEvent.cs" />
     <Compile Include="Gamer\PlayerTurn.cs" />
     <Compile Include="Gamer\ArtificialIntelligencePlayer.cs" />
     <Compile Include="Gamer\HumanPlayer.cs" />
     <Compile Include="Gamer\MarkType.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Gameround.cs" />
+    <Compile Include="GameRound.cs" />
     <Compile Include="Gamer\Player.cs" />
     <Compile Include="Gamer\IPlayerTurn.cs" />
     <Compile Include="PlayerMaximumException.cs" />

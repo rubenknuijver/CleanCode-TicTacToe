@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BKE.AllTogether.Tests
+namespace GameLibrary.Tests
 {
     [TestClass]
     public class GameTests
@@ -24,24 +24,36 @@ namespace BKE.AllTogether.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(PlayerMaximumException))]
+        //[ExpectedException(typeof(PlayerMaximumException))]
         public void Register_Player_Thows_On_PlayerMaximum()
         {
             Game game = new Game(2);
 
             game.RegisterPlayer(new HumanPlayer("John Dow"));
             game.RegisterPlayer(new ArtificialIntelligencePlayer());
-            game.RegisterPlayer(new ArtificialIntelligencePlayer());
+
+            GameLibrary.Tests.ExtendedAssert.Throws<PlayerMaximumException>(() => {
+                game.RegisterPlayer(new ArtificialIntelligencePlayer());
+            });
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DuplicatePlayerException))]
+        //[ExpectedException(typeof(DuplicatePlayerException))]
         public void Register_Player_Thows_On_DuplicatePlayer()
         {
             Game game = new Game(2);
 
             game.RegisterPlayer(new HumanPlayer("John Dow"));
-            game.RegisterPlayer(new HumanPlayer("John Dow"));
+
+            GameLibrary.Tests.ExtendedAssert.Throws<DuplicatePlayerException>(() => {
+                game.RegisterPlayer(new HumanPlayer("John Dow"));
+            });
+            }
+
+            [TestMethod]
+        public void Retrieves_Player_Added_To_Location()
+        {
+
         }
     }
 }

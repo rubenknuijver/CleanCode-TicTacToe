@@ -1,13 +1,72 @@
-﻿using System;
+using GameLibrary.Gamer;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameLibrary.Board
 {
-    public class Gameboard
+    public class GameBoard
     {
-        public Grid Grid { get; } = new Grid(3, 3);
+        internal readonly int _rowSize;
+        internal readonly int _columnSize;
+        internal readonly Cell[] _cells;
+
+        public Cell[,] Cells()
+        {
+            var ret = new Cell[_rowSize, _columnSize];
+            for (int n = 0; n < _cells.Length; n++) {
+                ret[n % _rowSize, n / _rowSize] = _cells[n];
+            }
+            return ret;
+        }
+
+        /*
+        public Cell this[int rowIndex, int columnIndex]
+        {
+            get { return _cells[columnIndex * rowIndex]; }
+            set { _cells[columnIndex * rowIndex] = value; }
+        }
+        */
+
+        public Cell this[BoardCoordinate coordinate]
+        {
+            get
+            {
+                if (!coordinate.IsOnGameBoard(this)) {
+                    throw new ArgumentOutOfRangeException(nameof(coordinate));
+                }
+                return _cells[coordinate.ToIndex(_rowSize, _columnSize)];
+            }
+            set
+            {
+                if (!coordinate.IsOnGameBoard(this)) {
+                    throw new ArgumentOutOfRangeException(nameof(coordinate));
+                }
+                _cells[coordinate.ToIndex(_rowSize, _columnSize)] = value;
+            }
+        }
+
+        public GameBoard(int rowSize, int columnSize)
+        {
+            _columnSize = columnSize;
+            _rowSize = rowSize;
+
+            _cells = new Cell[rowSize * columnSize];
+        }
+
+        public void Initialize()
+        {
+            for (int n = 0; n < _rowSize * _columnSize; n++) {
+                _cells[n] = Cell.Create(n);
+            }
+        }
+
+        public void OccupyCell(Player player, BoardCoordinate coordinate)
+        {
+            var cell = this[coordinate];
+            if (cell.IsEmpty)
+                cell.Owner = player;
+        }
     }
 }

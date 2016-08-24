@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BKE.AllTogether.Tests
+namespace GameLibrary.Tests
 {
     [TestClass]
     public class ArtificialIntelligencePlayerTests : PlayerBaseTests

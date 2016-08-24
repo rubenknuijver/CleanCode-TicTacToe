@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{216FAA55-C1D4-4AA8-B6AF-851EC6D5D4C0}</ProjectGuid>
+    <ProjectGuid>{2EAFCECB-E6A1-4989-802D-375F55997FB8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BKE.AllTogether.Tests</RootNamespace>
-    <AssemblyName>BKE.AllTogether.Tests</AssemblyName>
+    <RootNamespace>GameLibrary.Tests</RootNamespace>
+    <AssemblyName>GameLibrary.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -36,14 +36,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Moq, Version=4.5.21.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.5.21\lib\net45\Moq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -54,28 +46,24 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
-          <Private>False</Private>
-        </Reference>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="MockVoorbeeldMetDecorator.cs" />
+    <Compile Include="ArtificialIntelligencePlayerTests.cs" />
+    <Compile Include="ExtendedAssert.cs" />
+    <Compile Include="GameBoardTests.cs" />
+    <Compile Include="GameTests.cs" />
+    <Compile Include="HumanPlayerTests.cs" />
+    <Compile Include="PlayerBaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BKE.AllTogether\BKE.AllTogether.csproj">
-      <Project>{5489BF05-72E1-4FB7-828F-FCC34E7B3410}</Project>
-      <Name>BKE.AllTogether</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GameLibrary\GameLibrary.csproj">
       <Project>{135d13d2-8ad6-42a9-ad72-a43a737fb973}</Project>
       <Name>GameLibrary</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

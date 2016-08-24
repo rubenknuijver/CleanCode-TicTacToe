@@ -5,12 +5,8 @@ using System.Text;
 
 namespace GameLibrary.Gamer
 {
-    public interface IPlayerTurn
+    public interface IInputEvent
     {
-        DateTime Start { get; }
-
-        Player Player { get; }
-
-        void Take();
+        
     }
 }

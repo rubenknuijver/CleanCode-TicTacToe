@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BKE.AllTogether.Tests
+namespace GameLibrary.Tests
 {
     [TestClass]
-    public class HumanPlayerTests : PlayerBaseTests
+    public class HumanPlayerTests : GameLibrary.Tests.PlayerBaseTests
     {
         protected override Player CreatePlayer(string name)
         {

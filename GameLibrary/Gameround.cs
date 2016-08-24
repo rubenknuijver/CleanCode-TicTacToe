@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace GameLibrary
 {
-    public class Gameround
+    public class GameRound
     {
         private readonly RoundRobinList<Player> _players;
 
         public CommandManager TurnStack { get; } = new CommandManager();
 
-        public IPlayerTurn CurrentPlayer
+        public IPlayerTurn CurrentTurn
         {
             get;
             protected set;
@@ -24,19 +24,24 @@ namespace GameLibrary
             protected set;
         }
 
-        public Gameround(Player[] players)
+        public GameRound(Player[] players)
         {
             _players = new RoundRobinList<Player>(players);
         }
 
-        public Gameround(IEnumerable<Player> players)
+        public GameRound(IEnumerable<Player> players)
         {
             _players = new RoundRobinList<Player>(players);
         }
 
         public void Start()
         {
-            CurrentPlayer = new PlayerTurn(_players.First());
+            CurrentTurn = new PlayerTurn(_players.First());
+        }
+
+        public void Update()
+        {
+            
         }
     }
 }
