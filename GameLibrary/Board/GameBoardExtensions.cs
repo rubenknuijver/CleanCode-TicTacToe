@@ -8,11 +8,15 @@ namespace GameLibrary.Board
     {
         public static IEnumerable<Cell> AsEnumerable(this GameBoard board)
         {
-            return board._cells;
+            return board;
         }
-        public static IEnumerable<Cell> AllEmpty(this IEnumerable<Cell> cells)
+        public static IEnumerable<Cell> Empty(this IEnumerable<Cell> cells)
         {
             return cells.Where(w => w.IsEmpty);
+        }
+        public static IEnumerable<Cell> ExceptEmpty(this IEnumerable<Cell> cells)
+        {
+            return cells.Where(w => !w.IsEmpty);
         }
     }
 }

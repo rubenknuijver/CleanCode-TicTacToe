@@ -6,58 +6,52 @@ using System.Linq;
 
 namespace GameLibrary.Board
 {
-    public class GameBoard
+    public class GameBoard : IEnumerable<Cell>
     {
-        internal readonly int _rowSize;
-        internal readonly int _columnSize;
         internal readonly Cell[] _cells;
+
+        public int RowSize { get; }
+
+        public int ColumnSize { get; }
 
         public Cell[,] Cells()
         {
-            var ret = new Cell[_rowSize, _columnSize];
+            var ret = new Cell[RowSize, ColumnSize];
             for (int n = 0; n < _cells.Length; n++) {
-                ret[n % _rowSize, n / _rowSize] = _cells[n];
+                ret[n % RowSize, n / RowSize] = _cells[n];
             }
             return ret;
         }
-
-        /*
-        public Cell this[int rowIndex, int columnIndex]
-        {
-            get { return _cells[columnIndex * rowIndex]; }
-            set { _cells[columnIndex * rowIndex] = value; }
-        }
-        */
 
         public Cell this[BoardCoordinate coordinate]
         {
             get
             {
                 if (!coordinate.IsOnGameBoard(this)) {
-                    throw new ArgumentOutOfRangeException(nameof(coordinate));
+                    throw ExceptionFactory.CoordinateOutOfBound(nameof(coordinate));
                 }
-                return _cells[coordinate.ToIndex(_rowSize, _columnSize)];
+                return _cells[coordinate.Position(RowSize, ColumnSize)];
             }
             set
             {
                 if (!coordinate.IsOnGameBoard(this)) {
-                    throw new ArgumentOutOfRangeException(nameof(coordinate));
+                    throw ExceptionFactory.CoordinateOutOfBound(nameof(coordinate));
                 }
-                _cells[coordinate.ToIndex(_rowSize, _columnSize)] = value;
+                _cells[coordinate.Position(RowSize, ColumnSize)] = value;
             }
         }
 
         public GameBoard(int rowSize, int columnSize)
         {
-            _columnSize = columnSize;
-            _rowSize = rowSize;
+            ColumnSize = columnSize;
+            RowSize = rowSize;
 
             _cells = new Cell[rowSize * columnSize];
         }
 
         public void Initialize()
         {
-            for (int n = 0; n < _rowSize * _columnSize; n++) {
+            for (int n = 0; n < RowSize * ColumnSize; n++) {
                 _cells[n] = Cell.Create(n);
             }
         }
@@ -67,6 +61,16 @@ namespace GameLibrary.Board
             var cell = this[coordinate];
             if (cell.IsEmpty)
                 cell.Owner = player;
+        }
+
+        public IEnumerator<Cell> GetEnumerator()
+        {
+            return ((IEnumerable<Cell>)_cells).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<Cell>)_cells).GetEnumerator();
         }
     }
 }

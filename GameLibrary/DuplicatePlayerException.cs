@@ -1,13 +1,10 @@
 using GameLibrary.Gamer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.Serialization;
 
 namespace GameLibrary
 {
-    public class DuplicatePlayerException : Exception, ISerializable
+    public class DuplicatePlayerException : ApplicationException, ISerializable
     {
         public Player Player
         {

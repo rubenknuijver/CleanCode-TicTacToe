@@ -9,6 +9,7 @@ namespace GameLibrary.Gamer
     public abstract class Player : IEquatable<Player>
     {
         public string Name { get; }
+
         public MarkType Mark { get; set; }
 
         public Player(string name)
@@ -28,8 +29,9 @@ namespace GameLibrary.Gamer
             if (obj is Player)
                 return Equals((Player)obj);
 
-            return base.Equals(obj);
+            return object.ReferenceEquals(this, obj);
         }
+
         public static bool operator ==(Player first, Player second)
         {
             if ((object)first == null)
@@ -37,6 +39,7 @@ namespace GameLibrary.Gamer
 
             return first.Equals(second);
         }
+
         public static bool operator !=(Player first, Player second)
         {
             return !(first == second);
@@ -48,6 +51,7 @@ namespace GameLibrary.Gamer
                 return false;
             if (ReferenceEquals(this, other))
                 return true;
+
             return Equals(this.Name, other.Name);// && this.Mark.Equals(other.Mark);
         }
     }

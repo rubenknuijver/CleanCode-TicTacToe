@@ -46,6 +46,7 @@
     <Compile Include="Board\GameBoard.cs" />
     <Compile Include="Board\GameBoardExtensions.cs" />
     <Compile Include="DuplicatePlayerException.cs" />
+    <Compile Include="ExceptionFactory.cs" />
     <Compile Include="Gamer\Class1.cs" />
     <Compile Include="Gamer\IInputEvent.cs" />
     <Compile Include="Gamer\PlayerTurn.cs" />

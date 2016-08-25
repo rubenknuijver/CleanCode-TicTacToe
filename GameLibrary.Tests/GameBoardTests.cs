@@ -19,7 +19,7 @@ namespace GameLibrary.Tests
             board.Initialize();
 
             int cellsThatAreNotTaken = board.AsEnumerable()
-                .AllEmpty()
+                .Empty()
                 .Count();
 
             Assert.IsTrue(board.AsEnumerable().Count() == cellsThatAreNotTaken);
@@ -34,7 +34,7 @@ namespace GameLibrary.Tests
             board[new BoardCoordinate(2, 2)].Owner = new HumanPlayer("John Dow");
 
             int cellsThatAreNotTaken = board.AsEnumerable()
-                .AllEmpty()
+                .Empty()
                 .Count();
 
             int expectedCount = board.AsEnumerable().Count() - 1;

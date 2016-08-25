@@ -11,10 +11,7 @@ namespace GameLibrary.Board
 
         public Player Owner { get; set; } = null;
 
-        public bool IsEmpty
-        {
-            get { return Owner == null; }
-        }
+        public bool IsEmpty => Owner == null;
 
         public Cell(int score)
         {

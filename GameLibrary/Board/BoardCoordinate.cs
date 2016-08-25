@@ -14,20 +14,15 @@ namespace GameLibrary.Board
             this.Y = y;
         }
 
-        public int ToIndex(int rowSize, int colSize)
+        public int Position(int rowSize, int colSize)
         {
             int x = this.X % colSize;
             int y = this.Y % rowSize;
             return (y * colSize) + x;
         }
 
-        public bool IsOnGameBoard(GameBoard board)
-        {
-            return IsValidDimention(X, board._columnSize) && IsValidDimention(Y, board._rowSize);
-        }
-        private static bool IsValidDimention(int pos, int dimention)
-        {
-            return pos >= 0 && pos < dimention;
-        }
+        public bool IsOnGameBoard(GameBoard board) => IsValidDimention(X, board.ColumnSize) && IsValidDimention(Y, board.RowSize);
+
+        private static bool IsValidDimention(int pos, int dimention) => pos >= 0 && pos < dimention;
     }
 }

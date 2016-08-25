@@ -33,10 +33,10 @@ namespace GameLibrary
         public void RegisterPlayer(Player player)
         {
             if (Players.Count == MaxPlayers)
-                throw new PlayerMaximumException(MaxPlayers);
+                throw ExceptionFactory.PlayerMaximum(MaxPlayers);
 
             if (_players.Contains(player))
-                throw new DuplicatePlayerException(player);
+                throw ExceptionFactory.DuplicatePlayer(player);
 
             _players.Add(player);
         }
