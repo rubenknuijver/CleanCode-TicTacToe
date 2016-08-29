@@ -1,4 +1,4 @@
-using GameLibrary.Gamer;
+using GameLibrary.GamePlayers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 namespace GameLibrary.Tests
 {
     [TestClass]
-    public class HumanPlayerTests : GameLibrary.Tests.PlayerBaseTests
+    public class HumanPlayerTests : PlayerBaseTests
     {
         protected override Player CreatePlayer(string name)
         {

@@ -4,12 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLibrary.Gamer
+namespace GameLibrary.GamePlayers.Input
 {
-    public interface IInputHandler<TEvent> where TEvent : IInputEvent
-    {
-        void Handle(TEvent inputEvent);
-    }
 
     public class InputHandler<TEvent> : IInputHandler<TEvent> where TEvent : IInputEvent
     {

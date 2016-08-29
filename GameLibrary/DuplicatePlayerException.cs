@@ -1,4 +1,4 @@
-using GameLibrary.Gamer;
+using GameLibrary.GamePlayers;
 using System;
 using System.Runtime.Serialization;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLibrary.Gamer
+namespace GameLibrary.GamePlayers
 {
     public abstract class Player : IEquatable<Player>
     {
@@ -20,7 +20,8 @@ namespace GameLibrary.Gamer
         public override int GetHashCode()
         {
             unchecked {
-                return typeof(Player).GetHashCode() * 31 ^ Name?.GetHashCode() ?? 0;
+                return GetType()
+                    .GetHashCode() * 31 ^ Name?.GetHashCode() ?? 0;
             }
         }
 

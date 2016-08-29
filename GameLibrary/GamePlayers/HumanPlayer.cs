@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GameLibrary.Gamer
+namespace GameLibrary.GamePlayers
 {
     public class HumanPlayer : Player
     {

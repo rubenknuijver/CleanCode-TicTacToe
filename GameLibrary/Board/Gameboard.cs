@@ -1,4 +1,4 @@
-using GameLibrary.Gamer;
+using GameLibrary.GamePlayers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,11 +56,13 @@ namespace GameLibrary.Board
             }
         }
 
-        public void OccupyCell(Player player, BoardCoordinate coordinate)
+        public Cell OccupyCell(Player player, BoardCoordinate coordinate)
         {
             var cell = this[coordinate];
             if (cell.IsEmpty)
                 cell.Owner = player;
+
+            return cell;
         }
 
         public IEnumerator<Cell> GetEnumerator()

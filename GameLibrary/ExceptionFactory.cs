@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameLibrary.GamePlayers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace GameLibrary
             return new PlayerMaximumException(maxPlayers);
         }
 
-        public static ApplicationException DuplicatePlayer(GameLibrary.Gamer.Player player)
+        public static ApplicationException DuplicatePlayer(Player player)
         {
             return new DuplicatePlayerException(player);
         }

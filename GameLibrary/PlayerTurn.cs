@@ -1,10 +1,10 @@
-using GameLibrary.Gamer;
+using GameLibrary.GamePlayers;
 using GameLibrary.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GameLibrary.Gamer
+namespace GameLibrary
 {
     public class PlayerTurn : ICommand, IPlayerTurn
     {
@@ -43,7 +43,7 @@ namespace GameLibrary.Gamer
 
         public void Take()
         {
-            
+
         }
     }
 }

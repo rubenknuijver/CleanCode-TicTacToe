@@ -1,11 +1,11 @@
 ﻿using GameLibrary;
-using GameLibrary.Gamer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameLibrary.GamePlayers;
 
 namespace GameLibrary.Tests
 {

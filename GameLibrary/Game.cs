@@ -1,4 +1,4 @@
-﻿using GameLibrary.Gamer;
+﻿using GameLibrary.GamePlayers;
 using GameLibrary.Utils;
 using System;
 using System.Collections.Generic;
