@@ -1,51 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameLibrary.Utils
+﻿namespace GameLibrary.Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
 
     public class CommandManager
     {
+        private readonly Stack<ICommand> _undos = new Stack<ICommand>();
+        private readonly Stack<ICommand> _redos = new Stack<ICommand>();
 
-        private Stack<ICommand> _undos = new Stack<ICommand>();
-        private Stack<ICommand> _redos = new Stack<ICommand>();
-
-        public void executeCommand(ICommand c)
+        public void ExecuteCommand(ICommand c)
         {
             c.Execute();
-            _undos.Push(c);
-            _redos.Clear();
+            this._undos.Push(c);
+            this._redos.Clear();
         }
 
         public bool IsUndoAvailable()
         {
-            return _undos.Peek() != null;
+            return this._undos.Peek() != null;
         }
 
-        public void undo()
+        public void Undo()
         {
-            Debug.Assert(IsUndoAvailable());
-            ICommand command = _undos.Pop();
+            Debug.Assert(this.IsUndoAvailable());
+            ICommand command = this._undos.Pop();
             command.Undo();
-            _redos.Push(command);
+            this._redos.Push(command);
         }
 
-        public bool isRedoAvailable()
+        public bool IsRedoAvailable()
         {
-            return _redos.Count > 0;
+            return this._redos.Count > 0;
         }
 
-        public void redo()
+        public void Redo()
         {
-            Debug.Assert(isRedoAvailable());
-            ICommand command = _redos.Pop();
+            Debug.Assert(this.IsRedoAvailable());
+            ICommand command = this._redos.Pop();
             command.Execute();
-            _undos.Push(command);
+            this._undos.Push(command);
         }
     }
-
 }

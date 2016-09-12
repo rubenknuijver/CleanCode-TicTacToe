@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameLibrary.GamePlayers.Input
+﻿namespace GameLibrary.GamePlayers.Input
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    public class InputHandler<TEvent> : IInputHandler<TEvent> where TEvent : IInputEvent
+    public class InputHandler<TEvent> : IInputHandler<TEvent>
+        where TEvent : IInputEvent
     {
+        /// <inheritdoc/>
         public void Handle(TEvent inputEvent)
         {
-
         }
     }
 }

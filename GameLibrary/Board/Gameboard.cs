@@ -1,28 +1,47 @@
-using GameLibrary.GamePlayers;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace GameLibrary.Board
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using GamePlayers;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class GameBoard : IEnumerable<Cell>
     {
-        internal readonly Cell[] _cells;
+        private readonly Cell[] _cells;
 
-        public int RowSize { get; }
-
-        public int ColumnSize { get; }
-
-        public Cell[,] Cells()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameBoard"/> class.
+        /// 
+        /// </summary>
+        /// <param name="rowSize"></param>
+        /// <param name="columnSize"></param>
+        public GameBoard(int rowSize, int columnSize)
         {
-            var ret = new Cell[RowSize, ColumnSize];
-            for (int n = 0; n < _cells.Length; n++) {
-                ret[n % RowSize, n / RowSize] = _cells[n];
-            }
-            return ret;
+            this.ColumnSize = columnSize;
+            this.RowSize = rowSize;
+
+            this._cells = new Cell[rowSize * columnSize];
         }
 
+        /// <summary>
+        /// Gets the Row boundry size
+        /// </summary>
+        public int RowSize { get; }
+
+        /// <summary>
+        /// Gets the Column boundry size
+        /// </summary>
+        public int ColumnSize { get; }
+
+        /// <summary>
+        /// Get or Set a cell using a BoardCoordinate
+        /// </summary>
+        /// <param name="coordinate"><see cref="BoardCoordinate"/></param>
+        /// <returns><see cref="Cell"/></returns>
         public Cell this[BoardCoordinate coordinate]
         {
             get
@@ -30,49 +49,70 @@ namespace GameLibrary.Board
                 if (!coordinate.IsOnGameBoard(this)) {
                     throw ExceptionFactory.CoordinateOutOfBound(nameof(coordinate));
                 }
-                return _cells[coordinate.Position(RowSize, ColumnSize)];
+
+                return this._cells[coordinate.Position(this.RowSize, this.ColumnSize)];
             }
+
             set
             {
                 if (!coordinate.IsOnGameBoard(this)) {
                     throw ExceptionFactory.CoordinateOutOfBound(nameof(coordinate));
                 }
-                _cells[coordinate.Position(RowSize, ColumnSize)] = value;
+
+                this._cells[coordinate.Position(this.RowSize, this.ColumnSize)] = value;
             }
         }
 
-        public GameBoard(int rowSize, int columnSize)
+        /// <summary>
+        /// Get an matrix array of all cells on the GameBoard
+        /// </summary>
+        /// <returns>matrix array of all cells</returns>
+        public Cell[,] Cells()
         {
-            ColumnSize = columnSize;
-            RowSize = rowSize;
+            var ret = new Cell[this.RowSize, this.ColumnSize];
+            for (int n = 0; n < this._cells.Length; n++) {
+                ret[n % this.RowSize, n / this.RowSize] = this._cells[n];
+            }
 
-            _cells = new Cell[rowSize * columnSize];
+            return ret;
         }
 
+        /// <summary>
+        /// Initialization Clears the GameBoard making all cells empty
+        /// </summary>
         public void Initialize()
         {
-            for (int n = 0; n < RowSize * ColumnSize; n++) {
-                _cells[n] = Cell.Create(n);
+            for (int n = 0; n < this.RowSize * this.ColumnSize; n++) {
+                this._cells[n] = Cell.Create(n);
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="coordinate"></param>
+        /// <returns></returns>
         public Cell OccupyCell(Player player, BoardCoordinate coordinate)
         {
             var cell = this[coordinate];
-            if (cell.IsEmpty)
+            if (cell.IsEmpty) {
                 cell.Owner = player;
+            }
 
             return cell;
         }
 
+        /// <inheritdoc/>
         public IEnumerator<Cell> GetEnumerator()
         {
-            return ((IEnumerable<Cell>)_cells).GetEnumerator();
+            return ((IEnumerable<Cell>)this._cells).GetEnumerator();
         }
 
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable<Cell>)_cells).GetEnumerator();
+            return ((IEnumerable<Cell>)this._cells).GetEnumerator();
         }
     }
 }

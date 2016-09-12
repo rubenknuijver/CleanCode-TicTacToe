@@ -1,16 +1,18 @@
-﻿using GameLibrary.GamePlayers;
-using GameLibrary.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameLibrary
+﻿namespace GameLibrary
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using GamePlayers;
+
     public class Game
     {
         private HashSet<Player> _players = new HashSet<Player>();
+
+        public Game(int maxPlayers = 2)
+        {
+            this.MaxPlayers = maxPlayers;
+        }
 
         public GameRound CurrentRound
         {
@@ -20,30 +22,27 @@ namespace GameLibrary
 
         public IReadOnlyCollection<Player> Players
         {
-            get { return _players; }
+            get { return this._players; }
         }
 
         public int MaxPlayers { get; }
 
-        public Game(int maxPlayers = 2)
-        {
-            this.MaxPlayers = maxPlayers;
-        }
-
         public void RegisterPlayer(Player player)
         {
-            if (Players.Count == MaxPlayers)
-                throw ExceptionFactory.PlayerMaximum(MaxPlayers);
+            if (this.Players.Count == this.MaxPlayers) {
+                throw ExceptionFactory.PlayerMaximum(this.MaxPlayers);
+            }
 
-            if (_players.Contains(player))
+            if (this._players.Contains(player)) {
                 throw ExceptionFactory.DuplicatePlayer(player);
+            }
 
-            _players.Add(player);
+            this._players.Add(player);
         }
 
         public void StartNew()
         {
-            CurrentRound = new GameRound(Players.ToArray());
+            this.CurrentRound = new GameRound(this.Players.ToArray());
         }
     }
 }

@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace GameLibrary.GamePlayers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public enum MarkType
     {
         Empty = 0,

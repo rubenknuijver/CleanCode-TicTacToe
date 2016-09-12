@@ -1,12 +1,10 @@
-﻿using GameLibrary.GamePlayers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GameLibrary
+﻿namespace GameLibrary
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using GamePlayers;
+
     public static class ExceptionFactory
     {
         public static Exception CoordinateOutOfBound(string name)
@@ -16,7 +14,7 @@ namespace GameLibrary
 
         public static ApplicationException PlayerMaximum(int maxPlayers)
         {
-            return new PlayerMaximumException(maxPlayers);
+            return new PlayerMaximumExcededException(maxPlayers);
         }
 
         public static ApplicationException DuplicatePlayer(Player player)

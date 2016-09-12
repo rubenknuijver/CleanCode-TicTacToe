@@ -32,7 +32,7 @@ namespace GameLibrary.Tests
             game.RegisterPlayer(new HumanPlayer("John Dow"));
             game.RegisterPlayer(new ArtificialIntelligencePlayer());
 
-            GameLibrary.Tests.ExtendedAssert.Throws<PlayerMaximumException>(() => {
+            GameLibrary.Tests.ExtendedAssert.Throws<PlayerMaximumExcededException>(() => {
                 game.RegisterPlayer(new ArtificialIntelligencePlayer());
             });
         }

@@ -21,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>GameLibrary.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\GameLibrary.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>GameLibrary.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\GameLibrary.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -50,6 +54,7 @@
     <Compile Include="GamePlayers\Input\InputHandler`1.cs" />
     <Compile Include="GamePlayers\Input\IInputEvent.cs" />
     <Compile Include="GamePlayers\Input\IInputHandler.cs" />
+    <Compile Include="PlayerMaximumExcededException.cs" />
     <Compile Include="PlayerTurn.cs" />
     <Compile Include="GamePlayers\ArtificialIntelligencePlayer.cs" />
     <Compile Include="GamePlayers\HumanPlayer.cs" />
@@ -58,15 +63,21 @@
     <Compile Include="GameRound.cs" />
     <Compile Include="GamePlayers\Player.cs" />
     <Compile Include="IPlayerTurn.cs" />
-    <Compile Include="PlayerMaximumException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\RoundRobinList`1.cs" />
-    <Compile Include="Utils\TicTacToeUtils.cs" />
     <Compile Include="Utils\CommandManager.cs" />
     <Compile Include="Utils\ICommand.cs" />
+    <Compile Include="Utils\TicTacToe.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="GameLibrary.ruleset" />
     <None Include="GamePlayers\GamePlayer.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
