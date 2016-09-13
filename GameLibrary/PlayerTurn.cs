@@ -6,13 +6,25 @@ namespace GameLibrary
     using GamePlayers;
     using Utils;
 
+    /// <summary>
+    /// The Game rounds are played in turns
+    /// </summary>
     public class PlayerTurn : ICommand, IPlayerTurn
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlayerTurn"/> class.
+        /// </summary>
+        /// <param name="player">The player taking the turn</param>
         public PlayerTurn(Player player)
             : this(player, DateTime.Now)
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlayerTurn"/> class.
+        /// </summary>
+        /// <param name="player">The player taking the turn</param>
+        /// <param name="start">Timestamp override</param>
         public PlayerTurn(Player player, DateTime start)
         {
             this.Player = player;

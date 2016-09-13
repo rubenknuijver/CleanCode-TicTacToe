@@ -5,19 +5,38 @@ namespace GameLibrary.Board
     using System.Linq;
     using GamePlayers;
 
+    /// <summary>
+    /// Cells are squars or spaces on the GameBoard
+    /// </summary>
     public class Cell : IEquatable<Cell>
     {
-        public Cell(int score)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cell"/> class.
+        /// </summary>
+        /// <param name="identifier">unique value to identify the cell</param>
+        protected Cell(int identifier)
         {
-            this.Score = score;
+            this.Identifier = identifier;
         }
 
-        public int Score { get; }
+        /// <summary>
+        /// Gets the unique value to identify the cell
+        /// </summary>
+        public int Identifier { get; }
 
         public Player Owner { get; set; } = null;
 
+        /// <summary>
+        /// Gets a value indicating whether the cell is empty
+        /// </summary>
         public bool IsEmpty => this.Owner == null;
 
+        /// <summary>
+        /// Compare the equality betreen two Cells
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns>true if Cells are equal</returns>
         public static bool operator ==(Cell first, Cell second)
         {
             if ((object)first == null) {
@@ -27,11 +46,22 @@ namespace GameLibrary.Board
             return first.Equals(second);
         }
 
+        /// <summary>
+        /// Compare inquality between two Cells
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns>true if Cells are not equal</returns>
         public static bool operator !=(Cell first, Cell second)
         {
             return !(first == second);
         }
 
+        /// <summary>
+        /// Factory method for creating a new Cell
+        /// </summary>
+        /// <param name="score"></param>
+        /// <returns></returns>
         public static Cell Create(int score)
         {
             return new Cell(score);
@@ -58,7 +88,7 @@ namespace GameLibrary.Board
                 return true;
             }
 
-            return this.Score.Equals(other.Score) && Equals(this.Owner, other.Owner);
+            return this.Identifier.Equals(other.Identifier) && Equals(this.Owner, other.Owner);
         }
 
         /// <inheritdoc/>
@@ -66,7 +96,7 @@ namespace GameLibrary.Board
         {
             unchecked {
                 int hashCode = 47;
-                hashCode = (hashCode * 53) ^ this.Score.GetHashCode();
+                hashCode = (hashCode * 53) ^ this.Identifier.GetHashCode();
 
                 if (this.Owner != null) {
                     hashCode = (hashCode * 53) ^ this.Owner.GetHashCode();

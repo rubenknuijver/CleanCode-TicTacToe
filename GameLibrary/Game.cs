@@ -5,6 +5,9 @@
     using System.Linq;
     using GamePlayers;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class Game
     {
         private HashSet<Player> _players = new HashSet<Player>();

@@ -32,7 +32,7 @@ namespace GameLibrary.Tests
             game.RegisterPlayer(new HumanPlayer("John Dow"));
             game.RegisterPlayer(new ArtificialIntelligencePlayer());
 
-            GameLibrary.Tests.ExtendedAssert.Throws<PlayerMaximumExcededException>(() => {
+            ExtendedAssert.Throws<PlayerMaximumExcededException>(() => {
                 game.RegisterPlayer(new ArtificialIntelligencePlayer());
             });
         }
@@ -45,12 +45,12 @@ namespace GameLibrary.Tests
 
             game.RegisterPlayer(new HumanPlayer("John Dow"));
 
-            GameLibrary.Tests.ExtendedAssert.Throws<DuplicatePlayerException>(() => {
+            ExtendedAssert.Throws<DuplicatePlayerException>(() => {
                 game.RegisterPlayer(new HumanPlayer("John Dow"));
             });
-            }
+        }
 
-            [TestMethod]
+        [TestMethod]
         public void Retrieves_Player_Added_To_Location()
         {
 

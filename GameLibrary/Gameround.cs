@@ -6,15 +6,26 @@ namespace GameLibrary
     using GamePlayers;
     using Utils;
 
+    /// <summary>
+    /// Game is played in rounds
+    /// </summary>
     public class GameRound
     {
         private readonly RoundRobinList<Player> _players;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameRound"/> class.
+        /// </summary>
+        /// <param name="players">Selected player for this round</param>
         public GameRound(Player[] players)
         {
             this._players = new RoundRobinList<Player>(players);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameRound"/> class.
+        /// </summary>
+        /// <param name="players">Selected player for this round</param>
         public GameRound(IEnumerable<Player> players)
         {
             this._players = new RoundRobinList<Player>(players);
