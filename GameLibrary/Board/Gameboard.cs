@@ -5,6 +5,7 @@ namespace GameLibrary.Board
     using System.Collections.Generic;
     using System.Linq;
     using GamePlayers;
+    using Styx.Diagnostics;
 
     /// <summary>
     /// 
@@ -21,6 +22,9 @@ namespace GameLibrary.Board
         /// <param name="columnSize"></param>
         public GameBoard(int rowSize, int columnSize)
         {
+            Enforce.ArgumentGreaterThanZero(rowSize, "Board can't have less than 1 row");
+            Enforce.ArgumentGreaterThanZero(columnSize, "Board can't have less than 1 column");
+
             this.ColumnSize = columnSize;
             this.RowSize = rowSize;
 

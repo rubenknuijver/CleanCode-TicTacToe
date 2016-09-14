@@ -20,7 +20,7 @@ namespace GameLibrary.Tests
             game.RegisterPlayer(new HumanPlayer("John Dow"));
             game.RegisterPlayer(new ArtificialIntelligencePlayer());
 
-            Assert.IsNull(game.CurrentRound);
+            Assert.IsNull(game.CurrentGameRound);
         }
 
         [TestMethod]

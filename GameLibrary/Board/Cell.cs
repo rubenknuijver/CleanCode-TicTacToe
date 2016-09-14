@@ -4,10 +4,12 @@ namespace GameLibrary.Board
     using System.Collections.Generic;
     using System.Linq;
     using GamePlayers;
+    using Styx.Diagnostics;
 
     /// <summary>
     /// Cells are squars or spaces on the GameBoard
     /// </summary>
+    [System.Diagnostics.DebuggerDisplay("Empty? = {IsEmpty}")]
     public class Cell : IEquatable<Cell>
     {
         /// <summary>

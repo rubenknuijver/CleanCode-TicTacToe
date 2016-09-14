@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Board;
+    using GamePlayers;
 
     public static class TicTacToe
     {
@@ -25,10 +26,36 @@
             new int[][] { new int[] { 0 }, new int[] { 4, 8, 6, 2 } }
         };
 
+        /// <summary>
+        /// When all posible combinations to win are taken, the game is over.
+        /// </summary>
+        /// <param name="cells"></param>
+        /// <returns></returns>
         public static bool CheckForGameover(Cell[] cells)
         {
-            bool gameOver = false;
-            for (int i = 0; i < 8; i++) {
+            int count = 0;
+            for (int i = 0; i < cells.Length; i++) {
+                var cell = cells[i];
+                if (!cell.IsEmpty) {
+                    ++count;
+                }
+            }
+
+            if (!(count < cells.Length - 1)) {
+                return true;
+            }
+
+            var player = DoWeHaveAWinner(cells);
+            if (player != null) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static Player DoWeHaveAWinner(Cell[] cells)
+        {
+            for (int i = 0; i < cells.Length - 1; i++) {
                 int a = _matches[i, 0],
                     b = _matches[i, 1],
                     c = _matches[i, 2];
@@ -37,17 +64,16 @@
                     b2 = cells[b],
                     b3 = cells[c];
 
-                if (b1.Owner == null || b2.Owner == null || b3.Owner == null) { // if one if blank
+                if (b1.IsEmpty || b2.IsEmpty || b3.IsEmpty) { // if one if blank
                     continue;    // try another -- no need to go further
                 }
 
                 if (b1.Owner == b2.Owner && b2.Owner == b3.Owner) {
-                    gameOver = true;
-                    break;  // don't bother to continue
+                    return b1.Owner;
                 }
             }
 
-            return gameOver;
+            return default(Player);
         }
     }
 }
