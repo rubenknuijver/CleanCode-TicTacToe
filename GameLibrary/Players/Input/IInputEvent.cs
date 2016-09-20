@@ -1,9 +1,8 @@
-namespace GameLibrary.GamePlayers.Input
+namespace GameLibrary.Players.Input
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     public interface IInputEvent
     {

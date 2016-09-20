@@ -10,7 +10,7 @@ namespace GameLibrary
     {
         DateTime Start { get; }
 
-        Player Player { get; }
+        GameLibrary.Players.Player Player { get; }
 
         void Take();
     }

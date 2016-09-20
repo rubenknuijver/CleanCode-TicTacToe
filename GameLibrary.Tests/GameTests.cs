@@ -17,8 +17,8 @@ namespace GameLibrary.Tests
         {
             Game game = new Game(2);
 
-            game.RegisterPlayer(new HumanPlayer("John Dow"));
-            game.RegisterPlayer(new ArtificialIntelligencePlayer());
+            game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
+            game.RegisterPlayer(new Players.ArtificialIntelligencePlayer());
 
             Assert.IsNull(game.CurrentGameRound);
         }
@@ -29,11 +29,11 @@ namespace GameLibrary.Tests
         {
             Game game = new Game(2);
 
-            game.RegisterPlayer(new HumanPlayer("John Dow"));
-            game.RegisterPlayer(new ArtificialIntelligencePlayer());
+            game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
+            game.RegisterPlayer(new Players.ArtificialIntelligencePlayer());
 
             ExtendedAssert.Throws<PlayerMaximumExcededException>(() => {
-                game.RegisterPlayer(new ArtificialIntelligencePlayer());
+                game.RegisterPlayer(new Players.ArtificialIntelligencePlayer());
             });
         }
 
@@ -43,10 +43,10 @@ namespace GameLibrary.Tests
         {
             Game game = new Game(2);
 
-            game.RegisterPlayer(new HumanPlayer("John Dow"));
+            game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
 
             ExtendedAssert.Throws<DuplicatePlayerException>(() => {
-                game.RegisterPlayer(new HumanPlayer("John Dow"));
+                game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
             });
         }
 

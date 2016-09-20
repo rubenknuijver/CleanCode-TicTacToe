@@ -53,7 +53,7 @@
             return false;
         }
 
-        public static Player DoWeHaveAWinner(Cell[] cells)
+        public static GameLibrary.Players.Player DoWeHaveAWinner(Cell[] cells)
         {
             for (int i = 0; i < cells.Length - 1; i++) {
                 int a = _matches[i, 0],
@@ -73,7 +73,7 @@
                 }
             }
 
-            return default(Player);
+            return default(GameLibrary.Players.Player);
         }
     }
 }

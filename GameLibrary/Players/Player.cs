@@ -1,8 +1,9 @@
-﻿namespace GameLibrary.GamePlayers
+﻿namespace GameLibrary.Players
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using GamePlayers;
 
     /// <summary>Supports all classes in the .NET Framework class hierarchy and provides low-level services to derived classes.
     /// This is the ultimate base class of all classes in the .NET Framework;

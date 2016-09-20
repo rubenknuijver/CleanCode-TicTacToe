@@ -97,7 +97,7 @@ namespace GameLibrary.Board
         /// <param name="player"></param>
         /// <param name="coordinate"></param>
         /// <returns></returns>
-        public Cell OccupyCell(Player player, BoardCoordinate coordinate)
+        public Cell OccupyCell(GameLibrary.Players.Player player, BoardCoordinate coordinate)
         {
             var cell = this[coordinate];
             if (cell.IsEmpty) {

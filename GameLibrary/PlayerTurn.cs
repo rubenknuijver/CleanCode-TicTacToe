@@ -3,7 +3,7 @@ namespace GameLibrary
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using GamePlayers;
+    using Players;
     using Utils;
 
     /// <summary>

@@ -33,7 +33,7 @@ namespace GameLibrary.Tests
             GameBoard board = new GameBoard(3, 3);
             board.Initialize();
 
-            board[new BoardCoordinate(2, 2)].Owner = new HumanPlayer("John Dow");
+            board[new BoardCoordinate(2, 2)].Owner = new Players.HumanPlayer("John Dow");
 
             int cellsThatAreNotTaken = board.AsEnumerable()
                 .Empty()
@@ -51,7 +51,7 @@ namespace GameLibrary.Tests
             board.Initialize();
 
             ExtendedAssert.Throws<ArgumentOutOfRangeException>(() => {
-                board.OccupyCell(new HumanPlayer("Donnie"), new BoardCoordinate(10, 10));
+                board.OccupyCell(new Players.HumanPlayer("Donnie"), new BoardCoordinate(10, 10));
             });
         }
 
@@ -64,7 +64,7 @@ namespace GameLibrary.Tests
             board.Initialize();
 
             for (int i = 0; i < 7; i++) {
-                var player = new ArtificialIntelligencePlayer();
+                var player = new Players.ArtificialIntelligencePlayer();
 
                 var pos = BoardCoordinate.FromBoardIndex(board, i);
                 board.OccupyCell(player, pos);
@@ -76,7 +76,7 @@ namespace GameLibrary.Tests
             }
 
             {
-                var player = new ArtificialIntelligencePlayer();
+                var player = new Players.ArtificialIntelligencePlayer();
                 var pos = BoardCoordinate.FromBoardIndex(board, 8);
                 board.OccupyCell(player, pos);
 
@@ -90,7 +90,7 @@ namespace GameLibrary.Tests
         [TestMethod]
         public void GameOver_if_all_winning_combination_are_taken()
         {
-            var player = new HumanPlayer("Donnie");
+            var player = new Players.HumanPlayer("Donnie");
 
             GameBoard board = new GameBoard(3, 3);
             //board.LoadFromHistory();
@@ -112,7 +112,7 @@ namespace GameLibrary.Tests
         [TestMethod]
         public void And_the_winner_is()
         {
-            var player = new HumanPlayer("Donnie");
+            var player = new Players.HumanPlayer("Donnie");
 
             GameBoard board = new GameBoard(3, 3);
             //board.LoadFromHistory();

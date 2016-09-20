@@ -26,7 +26,7 @@ namespace GameLibrary.Board
         /// </summary>
         public int Identifier { get; }
 
-        public Player Owner { get; set; } = null;
+        public GameLibrary.Players.Player Owner { get; set; } = null;
 
         /// <summary>
         /// Gets a value indicating whether the cell is empty

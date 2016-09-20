@@ -1,4 +1,4 @@
-namespace GameLibrary.GamePlayers
+namespace GameLibrary.Players
 {
     using System;
     using System.Collections.Generic;

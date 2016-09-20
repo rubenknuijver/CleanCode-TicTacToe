@@ -9,35 +9,35 @@ namespace GameLibrary.Tests
     [TestClass]
     public abstract class PlayerBaseTests
     {
-        protected abstract Player CreatePlayer(string name);
+        protected abstract Players.Player CreatePlayer(string name);
 
         [TestMethod]
         public void Can_Be_Wrapped_As_FirstPlayer()
         {
-            Player player = CreatePlayer("Fisrt PLayer");
+            Players.Player player = CreatePlayer("Fisrt PLayer");
             player = PlayerWrapping.Wrap(player).AsFirst();
         }
     }
 
     public interface IPlayerWrapper
     {
-        Player Player { get; }
-        Player AsFirst();
+        Players.Player Player { get; }
+        Players.Player AsFirst();
     }
 
-    public class WrappedPLayer : Player, IPlayerWrapper
+    public class WrappedPLayer : Players.Player, IPlayerWrapper
     {
-        public Player AsFirst()
+        public Players.Player AsFirst()
         {
             throw new NotImplementedException();
         }
-        public WrappedPLayer(Player player)
+        public WrappedPLayer(Players.Player player)
                     : base(player.Name)
         {
             this.Player = player;
         }
 
-        public Player Player
+        public Players.Player Player
         {
             get;
         }
@@ -45,17 +45,17 @@ namespace GameLibrary.Tests
 
     public class PlayerWrapping : IPlayerWrapper
     {
-        public Player Player { get; }
+        public Players.Player Player { get; }
 
-        public Player AsFirst()
+        public Players.Player AsFirst()
         {
             return new WrappedPLayer(Player);
         }
-        protected PlayerWrapping(Player player)
+        protected PlayerWrapping(Players.Player player)
         {
             this.Player = player;
         }
-        public static IPlayerWrapper Wrap(Player player)
+        public static IPlayerWrapper Wrap(Players.Player player)
         {
             return new PlayerWrapping(player);
         }

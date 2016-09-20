@@ -9,16 +9,16 @@ namespace GameLibrary.Tests
     [TestClass]
     public class HumanPlayerTests : PlayerBaseTests
     {
-        protected override Player CreatePlayer(string name)
+        protected override Players.Player CreatePlayer(string name)
         {
-            return new HumanPlayer(name);
+            return new Players.HumanPlayer(name);
         }
 
         [TestMethod]
         public void Should_Equal_By_Reference_Only_If_Names_Are_Equal()
         {
-            var player1 = new HumanPlayer("Donnie");
-            var player2 = new HumanPlayer("Donnie");
+            var player1 = new Players.HumanPlayer("Donnie");
+            var player2 = new Players.HumanPlayer("Donnie");
 
             Assert.AreEqual(player1, player2);
         }

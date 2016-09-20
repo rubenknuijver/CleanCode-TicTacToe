@@ -11,24 +11,24 @@ namespace GameLibrary
     /// </summary>
     public class GameRound
     {
-        private readonly RoundRobinList<Player> _players;
+        private readonly RoundRobinList<GameLibrary.Players.Player> _players;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameRound"/> class.
         /// </summary>
         /// <param name="players">Selected player for this round</param>
-        public GameRound(Player[] players)
+        public GameRound(GameLibrary.Players.Player[] players)
         {
-            this._players = new RoundRobinList<Player>(players);
+            this._players = new RoundRobinList<GameLibrary.Players.Player>(players);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameRound"/> class.
         /// </summary>
         /// <param name="players">Selected player for this round</param>
-        public GameRound(IEnumerable<Player> players)
+        public GameRound(IEnumerable<GameLibrary.Players.Player> players)
         {
-            this._players = new RoundRobinList<Player>(players);
+            this._players = new RoundRobinList<GameLibrary.Players.Player>(players);
         }
 
         public CommandManager TurnStack { get; } = new CommandManager();
@@ -39,7 +39,7 @@ namespace GameLibrary
             protected set;
         }
 
-        public Player Winner
+        public GameLibrary.Players.Player Winner
         {
             get;
             protected set;

@@ -12,7 +12,7 @@ namespace GameLibrary
         /// Initializes a new instance of the <see cref="DuplicatePlayerException"/> class.
         /// </summary>
         /// <param name="player">the player that could be duplicate</param>
-        public DuplicatePlayerException(Player player)
+        public DuplicatePlayerException(GameLibrary.Players.Player player)
         {
             this.Player = player;
         }
@@ -29,13 +29,13 @@ namespace GameLibrary
                 return;
             }
 
-            this.Player = (Player)info.GetValue("Player", typeof(Player));
+            this.Player = (GameLibrary.Players.Player)info.GetValue("Player", typeof(GameLibrary.Players.Player));
         }
 
         /// <summary>
         /// Gets the player that could be duplicate
         /// </summary>
-        public Player Player
+        public GameLibrary.Players.Player Player
         {
             get;
         }

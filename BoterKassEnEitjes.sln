@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{46DB140F-1E5A-4290-943A-9F91FC5A20E0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D0AFF4F7-256A-413A-AB5C-75C97C898BF2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DE67649D-CA9B-4AF1-B5BF-0C20F0FC99EE}"
@@ -12,6 +10,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary", "GameLibrary\GameLibrary.csproj", "{135D13D2-8AD6-42A9-AD72-A43A737FB973}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLibrary.Tests", "GameLibrary.Tests\GameLibrary.Tests.csproj", "{2EAFCECB-E6A1-4989-802D-375F55997FB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTicTacToe", "WpfTicTacToe\WpfTicTacToe.csproj", "{4704AD6A-5E8A-429F-B92F-D61CB4BA4EE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{A91E40B4-226E-4B02-A418-5983C901B7FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeWinForms", "TicTacToeWinForms\TicTacToeWinForms.csproj", "{61AB9AFA-3EED-465C-8597-9489617DAAAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{2EAFCECB-E6A1-4989-802D-375F55997FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EAFCECB-E6A1-4989-802D-375F55997FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EAFCECB-E6A1-4989-802D-375F55997FB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4704AD6A-5E8A-429F-B92F-D61CB4BA4EE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4704AD6A-5E8A-429F-B92F-D61CB4BA4EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4704AD6A-5E8A-429F-B92F-D61CB4BA4EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4704AD6A-5E8A-429F-B92F-D61CB4BA4EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61AB9AFA-3EED-465C-8597-9489617DAAAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61AB9AFA-3EED-465C-8597-9489617DAAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61AB9AFA-3EED-465C-8597-9489617DAAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61AB9AFA-3EED-465C-8597-9489617DAAAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,5 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{135D13D2-8AD6-42A9-AD72-A43A737FB973} = {DE67649D-CA9B-4AF1-B5BF-0C20F0FC99EE}
 		{2EAFCECB-E6A1-4989-802D-375F55997FB8} = {D0AFF4F7-256A-413A-AB5C-75C97C898BF2}
+		{4704AD6A-5E8A-429F-B92F-D61CB4BA4EE9} = {A91E40B4-226E-4B02-A418-5983C901B7FD}
+		{61AB9AFA-3EED-465C-8597-9489617DAAAF} = {A91E40B4-226E-4B02-A418-5983C901B7FD}
 	EndGlobalSection
 EndGlobal

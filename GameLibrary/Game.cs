@@ -11,7 +11,7 @@
     /// </summary>
     public class Game
     {
-        private HashSet<Player> _players = new HashSet<Player>();
+        private HashSet<GameLibrary.Players.Player> _players = new HashSet<GameLibrary.Players.Player>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Game"/> class.
@@ -39,7 +39,7 @@
         /// <summary>
         /// Gets all available players for the game.
         /// </summary>
-        public IReadOnlyCollection<Player> Players
+        public IReadOnlyCollection<GameLibrary.Players.Player> Players
         {
             get { return this._players; }
         }
@@ -64,7 +64,7 @@
         /// 
         /// </summary>
         /// <param name="player"></param>
-        public void RegisterPlayer(Player player)
+        public void RegisterPlayer(GameLibrary.Players.Player player)
         {
             Argument.ThrowIfNull(player, nameof(player));
 
@@ -83,5 +83,42 @@
         {
             this.CurrentGameRound = new GameRound(this.Players.ToArray());
         }
+    }
+
+    public class RegisterPlayerCommand
+    {
+        public RegisterPlayerCommand(GameLibrary.Players.Player player)
+        {
+            Argument.ThrowIfNull(player, nameof(player));
+            Player = player;
+        }
+
+        public GameLibrary.Players.Player Player { get; }
+    }
+
+    public class PlayerTakesTurnCommand
+    {
+        public PlayerTakesTurnCommand(GameLibrary.Players.Player player, Board.BoardCoordinate coordinate )
+        {
+            Argument.ThrowIfNull(player, nameof(player));
+
+            Coordinate = coordinate;
+            Player = player;
+        }
+
+        public GameLibrary.Players.Player Player { get; }
+        public Board.BoardCoordinate Coordinate { get;  }
+    }
+
+    public class PlayerWithdrawTurnCommand
+    {
+        public PlayerWithdrawTurnCommand(GameLibrary.Players.Player player)
+        {
+            Argument.ThrowIfNull(player, nameof(player));
+
+            Player = player;
+        }
+
+        public GameLibrary.Players.Player Player { get; }
     }
 }

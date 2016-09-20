@@ -17,7 +17,7 @@
             return new PlayerMaximumExcededException(maxPlayers);
         }
 
-        public static ApplicationException DuplicatePlayer(Player player)
+        public static ApplicationException DuplicatePlayer(GameLibrary.Players.Player player)
         {
             return new DuplicatePlayerException(player);
         }
