@@ -3,15 +3,33 @@ namespace GameLibrary
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using GameLibrary.GamePlayers;
+    using Board;
 
     public interface IPlayerTurn
     {
-        DateTime Start { get; }
+        /// <summary>
+        /// Gets a value indicating whether the Turn has Completed
+        /// </summary>
+        bool IsDone { get; }
 
-        GameLibrary.Players.Player Player { get; }
+        /// <summary>
+        /// Gets a value indicating whether Turn is Waiting on player action
+        /// </summary>
+        bool IsWaiting { get; }
 
-        void Take();
+        /// <summary>
+        /// Gets the Player taking this Turn
+        /// </summary>
+        Players.Player Player { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        BoardCoordinate Coordinate { get; }
+
+        /// <summary>
+        /// Stop the timer
+        /// </summary>
+        bool Complete(BoardCoordinate coordinate);
     }
 }

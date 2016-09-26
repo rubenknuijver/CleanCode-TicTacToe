@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GameLibrary.GamePlayers;
+
 
 namespace GameLibrary.Tests
 {
@@ -15,7 +15,8 @@ namespace GameLibrary.Tests
         [TestMethod]
         public void Can_Register_Player()
         {
-            Game game = new Game(2);
+            var board = new Board.GameBoard(3, 3);
+            Game game = new Game(new InMemoryBus(),board, 2);
 
             game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
             game.RegisterPlayer(new Players.ArtificialIntelligencePlayer());
@@ -25,9 +26,10 @@ namespace GameLibrary.Tests
 
         [TestMethod]
         //[ExpectedException(typeof(PlayerMaximumException))]
-        public void Register_Player_Thows_On_PlayerMaximum()
+        public void Register_Player_Throws_On_PlayerMaximum()
         {
-            Game game = new Game(2);
+            var board = new Board.GameBoard(3, 3);
+            Game game = new Game(new InMemoryBus(), board, 2);
 
             game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
             game.RegisterPlayer(new Players.ArtificialIntelligencePlayer());
@@ -39,9 +41,10 @@ namespace GameLibrary.Tests
 
         [TestMethod]
         //[ExpectedException(typeof(DuplicatePlayerException))]
-        public void Register_Player_Thows_On_DuplicatePlayer()
+        public void Register_Player_Throws_On_DuplicatePlayer()
         {
-            Game game = new Game(2);
+            var board = new Board.GameBoard(3, 3);
+            Game game = new Game(new InMemoryBus(), board, 2);
 
             game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
 

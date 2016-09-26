@@ -2,7 +2,7 @@ namespace GameLibrary
 {
     using System;
     using System.Runtime.Serialization;
-    using GamePlayers;
+    
 
     /// <summary>Serves as the base class for application-defined exceptions.</summary>
     /// <filterpriority>2</filterpriority>
@@ -12,7 +12,7 @@ namespace GameLibrary
         /// Initializes a new instance of the <see cref="DuplicatePlayerException"/> class.
         /// </summary>
         /// <param name="player">the player that could be duplicate</param>
-        public DuplicatePlayerException(GameLibrary.Players.Player player)
+        public DuplicatePlayerException(Players.Player player)
         {
             this.Player = player;
         }
@@ -29,13 +29,13 @@ namespace GameLibrary
                 return;
             }
 
-            this.Player = (GameLibrary.Players.Player)info.GetValue("Player", typeof(GameLibrary.Players.Player));
+            this.Player = (Players.Player)info.GetValue("Player", typeof(Players.Player));
         }
 
         /// <summary>
         /// Gets the player that could be duplicate
         /// </summary>
-        public GameLibrary.Players.Player Player
+        public Players.Player Player
         {
             get;
         }

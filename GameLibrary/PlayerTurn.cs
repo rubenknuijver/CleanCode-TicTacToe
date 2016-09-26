@@ -5,37 +5,20 @@ namespace GameLibrary
     using System.Linq;
     using Players;
     using Utils;
+    using Board;
 
     /// <summary>
     /// The Game rounds are played in turns
     /// </summary>
-    public class PlayerTurn : ICommand, IPlayerTurn
+    public class PlayerTurn : IPlayerTurn
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerTurn"/> class.
         /// </summary>
         /// <param name="player">The player taking the turn</param>
         public PlayerTurn(Player player)
-            : this(player, DateTime.Now)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerTurn"/> class.
-        /// </summary>
-        /// <param name="player">The player taking the turn</param>
-        /// <param name="start">Timestamp override</param>
-        public PlayerTurn(Player player, DateTime start)
         {
             this.Player = player;
-            this.Start = start;
-        }
-
-        /// <inheritdoc/>
-        public DateTime Start
-        {
-            get;
-            private set;
         }
 
         /// <inheritdoc/>
@@ -46,19 +29,26 @@ namespace GameLibrary
         }
 
         /// <inheritdoc/>
-        public void Execute()
+        public bool IsDone
         {
-            this.Take();
+            get;
+            private set;
         }
 
         /// <inheritdoc/>
-        public void Undo()
+        public bool IsWaiting => !this.IsDone;
+
+        public BoardCoordinate Coordinate
         {
+            get;
+            private set;
         }
 
         /// <inheritdoc/>
-        public void Take()
+        public bool Complete(BoardCoordinate coordinate)
         {
+            this.Coordinate = coordinate;
+            return this.IsDone = true;
         }
     }
 }

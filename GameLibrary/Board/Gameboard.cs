@@ -4,7 +4,6 @@ namespace GameLibrary.Board
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using GamePlayers;
     using Styx.Diagnostics;
 
     /// <summary>
@@ -12,11 +11,10 @@ namespace GameLibrary.Board
     /// </summary>
     public class GameBoard : IEnumerable<Cell>
     {
-        private readonly Cell[] _cells;
+        private Cell[] _cells;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameBoard"/> class.
-        /// 
         /// </summary>
         /// <param name="rowSize"></param>
         /// <param name="columnSize"></param>
@@ -32,12 +30,12 @@ namespace GameLibrary.Board
         }
 
         /// <summary>
-        /// Gets the Row boundry size
+        /// Gets the Row boundary size
         /// </summary>
         public int RowSize { get; }
 
         /// <summary>
-        /// Gets the Column boundry size
+        /// Gets the Column boundary size
         /// </summary>
         public int ColumnSize { get; }
 
@@ -86,8 +84,18 @@ namespace GameLibrary.Board
         /// </summary>
         public void Initialize()
         {
-            for (int n = 0; n < this.RowSize * this.ColumnSize; n++) {
-                this._cells[n] = Cell.Create(n);
+            for (int n = 0; n < this._cells.Length; n++) {
+                this._cells[n] = Cell.Create(BoardCoordinate.FromBoardIndex(this, n));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Clear()
+        {
+            for (int n = 0; n < this._cells.Length; n++) {
+                this._cells[n].Reset();
             }
         }
 
@@ -97,11 +105,11 @@ namespace GameLibrary.Board
         /// <param name="player"></param>
         /// <param name="coordinate"></param>
         /// <returns></returns>
-        public Cell OccupyCell(GameLibrary.Players.Player player, BoardCoordinate coordinate)
+        public Cell OccupyCell(Players.Player player, BoardCoordinate coordinate)
         {
             var cell = this[coordinate];
             if (cell.IsEmpty) {
-                cell.Owner = player;
+                cell.Occupant = player;
             }
 
             return cell;

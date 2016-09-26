@@ -9,7 +9,7 @@
     using System.Threading;
     using System.Windows.Forms;
 
-    public sealed class SplashScreenForm :Form
+    public sealed class SplashScreenForm : Form
     {
         public readonly string VersionText = "Tic-Tac-Toe"; // Application.ProductVersion;
 
@@ -17,8 +17,17 @@
         static List<string> _parameterList = new List<string>();
         Bitmap _bitmap;
 
-        public static SplashScreenForm SplashScreen { get; set; }
-        public Label SplashMessages { get; set; }
+        public static SplashScreenForm SplashScreen
+        {
+            get;
+            set;
+        }
+
+        public Label SplashMessages
+        {
+            get;
+            set;
+        }
 
         public SplashScreenForm()
         {
@@ -73,22 +82,7 @@
                 Size = new Size(392, 30)
             };
             Controls.Add(SplashMessages);
-
-            //var xPos = 15;
-            //var pictureBSNRB = new PictureBox()
-            //{
-            //    Image = Resources.BSNRB_kleur, //((System.Drawing.Image)(resources.GetObject("BSNRB_kleur"))),
-            //    Location = new Point(xPos, 240),
-            //    Name = "pictureBSNRB",
-            //    Size = new Size(50, 50),
-            //    SizeMode = PictureBoxSizeMode.StretchImage,
-            //    TabIndex = 0,
-            //    TabStop = false,
-            //    BackColor = Color.FromArgb(0xF8, 0xF8, 0xF8),
-            //};
-            //Controls.Add(pictureBSNRB);
         }
-
 
         public void SetText()
         {

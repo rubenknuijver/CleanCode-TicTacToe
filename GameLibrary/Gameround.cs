@@ -3,7 +3,9 @@ namespace GameLibrary
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using GamePlayers;
+    using Board;
+    using Players;
+    using Styx.Diagnostics;
     using Utils;
 
     /// <summary>
@@ -11,38 +13,71 @@ namespace GameLibrary
     /// </summary>
     public class GameRound
     {
-        private readonly RoundRobinList<GameLibrary.Players.Player> _players;
+        private readonly GameBoard _board;
+        private readonly IBus _bus;
+        private readonly RoundRobinList<Player> _players;
+
+        private IPlayerTurn _currentTurn;
+        private bool _isCompleted;
+        private Player _winner;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameRound"/> class.
         /// </summary>
+        /// <param name="bus">Event Message Bus</param>
+        /// <param name="board">The board we play on</param>
         /// <param name="players">Selected player for this round</param>
-        public GameRound(GameLibrary.Players.Player[] players)
+        public GameRound(IBus bus, GameBoard board, params Player[] players)
+            : this(bus, board, players.AsEnumerable())
         {
-            this._players = new RoundRobinList<GameLibrary.Players.Player>(players);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameRound"/> class.
         /// </summary>
+        /// <param name="bus">Event Message Bus</param>
+        /// <param name="board">The board we play on</param>
         /// <param name="players">Selected player for this round</param>
-        public GameRound(IEnumerable<GameLibrary.Players.Player> players)
+        public GameRound(IBus bus, GameBoard board, IEnumerable<Player> players)
         {
-            this._players = new RoundRobinList<GameLibrary.Players.Player>(players);
+            Argument.ThrowIfNull(bus, nameof(bus));
+            Argument.ThrowIfNull(board, nameof(board));
+            Argument.Validate(players.Count() > 1, nameof(players));
+
+            this._bus = bus;
+            this._board = board;
+            this._players = new RoundRobinList<Player>(players);
         }
 
-        public CommandManager TurnStack { get; } = new CommandManager();
-
-        public IPlayerTurn CurrentTurn
+        /// <summary>
+        /// 
+        /// </summary>
+        public void End()
         {
-            get;
-            protected set;
+            if (this.HasStarted) {
+                this.IsCompleted = true;
+            }
         }
 
-        public GameLibrary.Players.Player Winner
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool NextTurn()
         {
-            get;
-            protected set;
+            if (this.CurrentTurn.IsDone && !this.IsCompleted) {
+                this.CurrentTurn = new PlayerTurn(this._players.First());
+                return true;
+            }
+
+            return false;
+        }
+
+        public void SetWinner(Player player)
+        {
+            if ((this.HasStarted || this.IsCompleted) && this.Winner == null) {
+                this.Winner = player;
+            }
         }
 
         public void Start()
@@ -50,8 +85,79 @@ namespace GameLibrary
             this.CurrentTurn = new PlayerTurn(this._players.First());
         }
 
-        public void Update()
+        public IPlayerTurn TakeTurn(BoardCoordinate coordinate)
         {
+            var turn = this.CurrentTurn;
+
+            if (this.HasStarted && !this.IsCompleted) {
+                this._board.OccupyCell(turn.Player, coordinate);
+                this.CurrentTurn.Complete(coordinate);
+            }
+
+            return turn;
+        }
+
+        /// <summary>
+        /// Gets or sets 
+        /// </summary>
+        public IPlayerTurn CurrentTurn
+        {
+            get
+            {
+                return this._currentTurn;
+            }
+
+            protected set
+            {
+                if (this._currentTurn == value) {
+                    return;
+                }
+
+                this._currentTurn = value;
+                this._bus.RaiseEvent(new TurnChangedEvent(this));
+            }
+        }
+
+        public bool HasStarted => this.CurrentTurn != null;
+
+        public bool IsCompleted
+        {
+            get
+            {
+                return this._isCompleted;
+            }
+
+            protected set
+            {
+                if (this._isCompleted == value) {
+                    return;
+                }
+
+                this._isCompleted = value;
+                this._bus.RaiseEvent(new RoundCompletedEvent(this));
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets 
+        /// </summary>
+        public Player Winner
+        {
+            get
+            {
+                return this._winner;
+            }
+
+            protected set
+            {
+                if (this._winner == value) {
+                    return;
+                }
+
+                this._winner = value;
+                this._bus.RaiseEvent(new RoundWinnerEvent(this));
+                this.End();
+            }
         }
     }
 }

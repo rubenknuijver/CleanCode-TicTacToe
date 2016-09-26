@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using GamePlayers;
+    using Styx.Diagnostics;
 
     /// <summary>Supports all classes in the .NET Framework class hierarchy and provides low-level services to derived classes.
     /// This is the ultimate base class of all classes in the .NET Framework;
@@ -19,15 +19,27 @@
         /// <param name="name">Name of the player</param>
         protected Player(string name)
         {
+            Argument.ThrowIfNullOrEmpty(name, nameof(name));
+
             this.Name = name;
         }
 
         /// <summary>
         /// Gets the Player Name
         /// </summary>
-        public string Name { get; }
+        public string Name
+        {
+            get;
+        }
 
-        public MarkType Mark { get; set; }
+        /// <summary>
+        /// Gets or sets something like an Avatar
+        /// </summary>
+        public PlayerSymbol Symbol
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Compare if players are Equal
@@ -53,6 +65,10 @@
         public static bool operator !=(Player first, Player second)
         {
             return !(first == second);
+        }
+
+        public virtual void Update()
+        {
         }
 
         /// <inheritdoc/>

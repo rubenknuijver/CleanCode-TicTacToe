@@ -34,6 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="Styx.Common, Version=1.7.16253.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Styx.Common.1.7.16253.03\lib\net46\Styx.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -48,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pdc\BusinessObjectBase.cs" />
     <Compile Include="Pdc\CustomErrorHandler.cs" />
     <Compile Include="Pdc\Drawings.cs" />
     <Compile Include="Program.cs" />
@@ -57,13 +62,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tmc\CellClickEventArgs.cs" />
     <Compile Include="Tmc\DisplayCell.cs" />
-    <Compile Include="Tmc\GameBoardAgent.cs" />
+    <Compile Include="Tmc\BoardAgent.cs" />
+    <Compile Include="Tmc\PlayerConfiguration.cs" />
     <Compile Include="Tmc\StartApplicatie.cs" />
     <Compile Include="UI\Controls\CellControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\PlayerItem.cs" />
+    <Compile Include="UI\Controls\PlayerSymbolSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\PlayerItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\IStatusPresentor.cs" />
+    <Compile Include="UI\Controls\PlayerItemControl.Designer.cs">
+      <DependentUpon>PlayerItemControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\GamePLayerListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\PlayerSymbolSelectorItem.cs" />
     <Compile Include="UI\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +91,18 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="SharedSettings.cs" />
+    <Compile Include="UI\GameConfigurationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\GameConfigurationDialog.Designer.cs">
+      <DependentUpon>GameConfigurationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PlayerConfigurationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\PlayerConfigurationDialog.Designer.cs">
+      <DependentUpon>PlayerConfigurationDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\SplashScreenForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,9 +111,24 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\PlayerItemControl.resx">
+      <DependentUpon>PlayerItemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\PlayerSymbolSelector.resx">
+      <DependentUpon>PlayerSymbolSelector.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\GameConfigurationDialog.resx">
+      <DependentUpon>GameConfigurationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\PlayerConfigurationDialog.resx">
+      <DependentUpon>PlayerConfigurationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\TicTacToeWinForms.UI.Controls.PlayerItem.datasource" />
+    <None Include="Properties\DataSources\TicTacToeWinForms.UI.Controls.PlayerItemControl+PlayerItem.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -105,7 +152,11 @@
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dmc\DMC.txt" />
+    <Content Include="Pdc\PDC.txt" />
     <Content Include="Resources\superbad.jpg" />
+    <Content Include="Tmc\TMC.txt" />
+    <Content Include="UI\HIC.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

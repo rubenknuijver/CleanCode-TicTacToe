@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using Board;
-    using GamePlayers;
 
     public static class TicTacToe
     {
@@ -27,33 +26,21 @@
         };
 
         /// <summary>
-        /// When all posible combinations to win are taken, the game is over.
+        /// When all possible combinations to win are taken, the game is over.
         /// </summary>
         /// <param name="cells"></param>
         /// <returns></returns>
-        public static bool CheckForGameover(Cell[] cells)
+        public static bool CheckForGameOver(Cell[] cells)
         {
-            int count = 0;
-            for (int i = 0; i < cells.Length; i++) {
-                var cell = cells[i];
-                if (!cell.IsEmpty) {
-                    ++count;
-                }
-            }
-
-            if (!(count < cells.Length - 1)) {
-                return true;
-            }
-
             var player = DoWeHaveAWinner(cells);
             if (player != null) {
                 return true;
             }
 
-            return false;
+            return cells.All(p => !p.IsEmpty);
         }
 
-        public static GameLibrary.Players.Player DoWeHaveAWinner(Cell[] cells)
+        public static Players.Player DoWeHaveAWinner(Cell[] cells)
         {
             for (int i = 0; i < cells.Length - 1; i++) {
                 int a = _matches[i, 0],
@@ -68,12 +55,35 @@
                     continue;    // try another -- no need to go further
                 }
 
-                if (b1.Owner == b2.Owner && b2.Owner == b3.Owner) {
-                    return b1.Owner;
+                if (b1.Occupant == b2.Occupant && b2.Occupant == b3.Occupant) {
+                    return b1.Occupant;
                 }
             }
 
-            return default(GameLibrary.Players.Player);
+            return default(Players.Player);
+        }
+    }
+
+    public abstract class GameRule
+    {
+        public abstract void Handle(GameBoard board, GameRound round);
+    }
+
+    public class TicTacToe_CanStillTakeTurnsRule : GameRule
+    {
+        public override void Handle(GameBoard board, GameRound round)
+        {
+            if (board.All(p => !p.IsEmpty)) {
+                round.End();
+            }
+        }
+    }
+
+    public class TicTacToe_WinningMoveRule : GameRule
+    {
+        public override void Handle(GameBoard board, GameRound round)
+        {
+            round.SetWinner(TicTacToe.DoWeHaveAWinner(board.ToArray()));
         }
     }
 }

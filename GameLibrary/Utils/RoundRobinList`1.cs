@@ -5,16 +5,28 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class RoundRobinList<T> : IEnumerable<T>
     {
         private T[] _items;
         private int _head;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RoundRobinList{T}"/> class.
+        /// </summary>
+        /// <param name="items"></param>
         public RoundRobinList(params T[] items)
             : this(items.AsEnumerable())
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RoundRobinList{T}"/> class.
+        /// </summary>
+        /// <param name="items"></param>
         public RoundRobinList(IEnumerable<T> items)
         {
             if (items == null || items.Count<T>() == 0) {

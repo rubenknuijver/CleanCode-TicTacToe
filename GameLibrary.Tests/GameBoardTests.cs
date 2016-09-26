@@ -1,5 +1,5 @@
 ﻿using GameLibrary.Board;
-using GameLibrary.GamePlayers;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,29 @@ using System.Text;
 using System.Threading.Tasks;
 using GameLibrary.Tests;
 using GameLibrary.Utils;
+using GameLibrary.Players;
 
 namespace GameLibrary.Tests
 {
     [TestClass]
     public class GameBoardTests
     {
+        [TestMethod]
+        public void Should_fail_without_initialization()
+        {
+            GameBoard board = new GameBoard(3, 3);
+
+            var pos = new BoardCoordinate(1, 1);
+
+            ExtendedAssert.Throws<NullReferenceException>(() => {
+                board.OccupyCell(new ArtificialIntelligencePlayer(), pos);
+            });
+
+            var cell = board[pos];
+
+            Assert.IsNull(cell);
+        }
+
         [TestMethod]
         public void Can_Tell_If_All_Cells_Are_Empty()
         {
@@ -33,7 +50,7 @@ namespace GameLibrary.Tests
             GameBoard board = new GameBoard(3, 3);
             board.Initialize();
 
-            board[new BoardCoordinate(2, 2)].Owner = new Players.HumanPlayer("John Dow");
+            board[new BoardCoordinate(2, 2)].Occupant = new Players.HumanPlayer("John Dow");
 
             int cellsThatAreNotTaken = board.AsEnumerable()
                 .Empty()
@@ -63,14 +80,14 @@ namespace GameLibrary.Tests
 
             board.Initialize();
 
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i <= 7; i++) {
                 var player = new Players.ArtificialIntelligencePlayer();
 
                 var pos = BoardCoordinate.FromBoardIndex(board, i);
                 board.OccupyCell(player, pos);
 
                 var cells = board.ToArray();
-                var state = TicTacToe.CheckForGameover(cells);
+                var state = TicTacToe.CheckForGameOver(cells);
 
                 Assert.IsFalse(state);
             }
@@ -81,7 +98,7 @@ namespace GameLibrary.Tests
                 board.OccupyCell(player, pos);
 
                 var cells = board.ToArray();
-                var state = TicTacToe.CheckForGameover(cells);
+                var state = TicTacToe.CheckForGameOver(cells);
 
                 Assert.IsTrue(state);
             }
@@ -103,7 +120,7 @@ namespace GameLibrary.Tests
                     board.OccupyCell(player, pos);
                 }
                 var cells = board.ToArray();
-                var state = TicTacToe.CheckForGameover(cells);
+                var state = TicTacToe.CheckForGameOver(cells);
 
                 Assert.IsTrue(state);
             }

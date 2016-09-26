@@ -1,13 +1,14 @@
+using System;
+
 namespace GameLibrary.Board
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using GamePlayers;
     using Styx.Diagnostics;
 
     /// <summary>
-    /// Cells are squars or spaces on the GameBoard
+    /// Cells are squares or spaces on the GameBoard
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Empty? = {IsEmpty}")]
     public class Cell : IEquatable<Cell>
@@ -15,26 +16,29 @@ namespace GameLibrary.Board
         /// <summary>
         /// Initializes a new instance of the <see cref="Cell"/> class.
         /// </summary>
-        /// <param name="identifier">unique value to identify the cell</param>
-        protected Cell(int identifier)
+        /// <param name="coordinate">unique value to identify the cell</param>
+        protected Cell(BoardCoordinate coordinate)
         {
-            this.Identifier = identifier;
+            this.Coordinate = coordinate;
         }
 
         /// <summary>
         /// Gets the unique value to identify the cell
         /// </summary>
-        public int Identifier { get; }
+        public BoardCoordinate Coordinate { get; }
 
-        public GameLibrary.Players.Player Owner { get; set; } = null;
+        /// <summary>
+        /// Gets or sets the cells occupant
+        /// </summary>
+        public Players.Player Occupant { get; set; } = null;
 
         /// <summary>
         /// Gets a value indicating whether the cell is empty
         /// </summary>
-        public bool IsEmpty => this.Owner == null;
+        public bool IsEmpty => this.Occupant == null;
 
         /// <summary>
-        /// Compare the equality betreen two Cells
+        /// Compare the equality between two Cells
         /// </summary>
         /// <param name="first"></param>
         /// <param name="second"></param>
@@ -49,7 +53,7 @@ namespace GameLibrary.Board
         }
 
         /// <summary>
-        /// Compare inquality between two Cells
+        /// Compare inequality between two Cells
         /// </summary>
         /// <param name="first"></param>
         /// <param name="second"></param>
@@ -59,14 +63,19 @@ namespace GameLibrary.Board
             return !(first == second);
         }
 
+        public void Reset()
+        {
+           this.Occupant = null;
+        }
+
         /// <summary>
         /// Factory method for creating a new Cell
         /// </summary>
-        /// <param name="score"></param>
+        /// <param name="coordinate"></param>
         /// <returns></returns>
-        public static Cell Create(int score)
+        public static Cell Create(BoardCoordinate coordinate)
         {
-            return new Cell(score);
+            return new Cell(coordinate);
         }
 
         /// <inheritdoc/>
@@ -90,7 +99,7 @@ namespace GameLibrary.Board
                 return true;
             }
 
-            return this.Identifier.Equals(other.Identifier) && Equals(this.Owner, other.Owner);
+            return this.Coordinate.Equals(other.Coordinate) && Equals(this.Occupant, other.Occupant);
         }
 
         /// <inheritdoc/>
@@ -98,10 +107,10 @@ namespace GameLibrary.Board
         {
             unchecked {
                 int hashCode = 47;
-                hashCode = (hashCode * 53) ^ this.Identifier.GetHashCode();
+                hashCode = (hashCode * 53) ^ this.Coordinate.GetHashCode();
 
-                if (this.Owner != null) {
-                    hashCode = (hashCode * 53) ^ this.Owner.GetHashCode();
+                if (this.Occupant != null) {
+                    hashCode = (hashCode * 53) ^ this.Occupant.GetHashCode();
                 }
 
                 return hashCode;

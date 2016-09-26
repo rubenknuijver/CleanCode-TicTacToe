@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using GamePlayers;
+    
 
     public static class ExceptionFactory
     {
@@ -17,7 +17,7 @@
             return new PlayerMaximumExcededException(maxPlayers);
         }
 
-        public static ApplicationException DuplicatePlayer(GameLibrary.Players.Player player)
+        public static ApplicationException DuplicatePlayer(Players.Player player)
         {
             return new DuplicatePlayerException(player);
         }
