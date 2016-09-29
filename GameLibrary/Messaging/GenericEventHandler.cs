@@ -1,4 +1,4 @@
-﻿namespace GameLibrary.Events
+﻿namespace GameLibrary
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,6 @@
     public class GenericEventHandler<T> : IHandler<T>
         where T : IEvent
     {
-
         private readonly Action<T> _handler;
 
         public GenericEventHandler(Action<T> handler)

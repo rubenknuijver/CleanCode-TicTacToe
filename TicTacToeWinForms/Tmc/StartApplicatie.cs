@@ -2,15 +2,10 @@
 {
     using GameLibrary;
     using GameLibrary.Board;
-    using GameLibrary.Events;
-    using GameLibrary.Players;
-    using Pdc;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
     using UI;
-    using UI.Controls;
 
     public class StartApplicatie
     {
@@ -57,15 +52,18 @@
             _game.Rules.Add(new GameLibrary.Utils.TicTacToe_WinningMoveRule());
             _game.Rules.Add(new GameLibrary.Utils.TicTacToe_CanStillTakeTurnsRule());
             _game.Bus.RegisterHandler(new GenericEventHandler<RoundWinnerEvent>(e => {
-                if (MessageBox.Show($"And the winner is.. {e.Round.Winner.Name}", "Game Winner", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                    
+                if (MessageBox.Show($"And the winner is.. {e.Round.Winner.Name}", "Game Winner", MessageBoxButtons.OK) == DialogResult.OK) {
+                                        
                 }
             }));
 
             _game.Bus.RegisterHandler(new GenericEventHandler<RoundCompletedEvent>(e => {
                 if(e.Round.Winner == null) {
                     MessageBox.Show($"It's a draw...");
-                }                
+                }
+                if (_game.MaxRounds <= _game.PreviousRounds.Count) {
+
+                }
             }));
 
             board.Initialize();
@@ -118,8 +116,12 @@
                 });
 
                 form.RegisterClearBoardAction(() => {
-                    _game.Board.Clear();
+                    _game.PrepareGameRound();
                     _gameBoardAgent.Prepare();
+
+                    if(!_game.CurrentGameRound.HasStarted) {
+                        _game.CurrentGameRound.Start();
+                    }
                 });
             });
 

@@ -54,10 +54,11 @@
     <Compile Include="Board\Cell.cs" />
     <Compile Include="Board\GameBoard.cs" />
     <Compile Include="Board\GameBoardExtensions.cs" />
-    <Compile Include="Events\GenericEventHandler.cs" />
+    <Compile Include="Messaging\WorkInProgress.cs" />
+    <Compile Include="Messaging\GenericEventHandler.cs" />
     <Compile Include="Exceptions\DuplicatePlayerException.cs" />
     <Compile Include="Exceptions\ExceptionFactory.cs" />
-    <Compile Include="IBus.cs" />
+    <Compile Include="Messaging\IBus.cs" />
     <Compile Include="Players\Input\InputHandler`1.cs" />
     <Compile Include="Players\Input\IInputEvent.cs" />
     <Compile Include="Players\Input\IInputHandler.cs" />
@@ -71,9 +72,9 @@
     <Compile Include="Players\Player.cs" />
     <Compile Include="IPlayerTurn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Events\TurnChangedEvent.cs" />
-    <Compile Include="Events\RoundCompletedEvent.cs" />
-    <Compile Include="Events\RoundWinnerEvent.cs" />
+    <Compile Include="Messaging\TurnChangedEvent.cs" />
+    <Compile Include="Messaging\RoundCompletedEvent.cs" />
+    <Compile Include="Messaging\RoundWinnerEvent.cs" />
     <Compile Include="Utils\RoundRobinList`1.cs" />
     <Compile Include="Utils\CommandManager.cs" />
     <Compile Include="Utils\ICommand.cs" />

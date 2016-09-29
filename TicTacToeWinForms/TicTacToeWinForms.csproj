@@ -153,10 +153,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dmc\DMC.txt" />
-    <Content Include="Pdc\PDC.txt" />
+    <None Include="Pdc\PDC.md" />
     <Content Include="Resources\superbad.jpg" />
-    <Content Include="Tmc\TMC.txt" />
-    <Content Include="UI\HIC.txt" />
+    <None Include="Tmc\TMC.md" />
+    <None Include="UI\HIC.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

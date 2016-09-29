@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public interface IBus
@@ -69,7 +70,7 @@
                     ? _handlerInstances[h]
                     : Activator.CreateInstance(h);
 
-                handlerInstance.Handle(message);
+                ThreadPool.QueueUserWorkItem(x => handlerInstance.Handle(message));
             }
         }
     }
