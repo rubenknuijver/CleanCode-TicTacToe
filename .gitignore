@@ -21,6 +21,10 @@ bld/
 # Roslyn cache directories
 *.ide/
 
+# Visual Studio 2015 directories
+.vs/
+.cr/
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*

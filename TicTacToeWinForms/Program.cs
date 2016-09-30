@@ -6,6 +6,7 @@
     using System.Windows.Forms;
     using Pdc;
     using UI;
+    using Serilog;
 
     static class Program
     {
@@ -15,7 +16,13 @@
         [STAThread]
         static void Main()
         {
-           // Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.LiterateConsole()
+                .CreateLogger();
+
+            // Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -39,6 +46,8 @@
 
             AppDomain.CurrentDomain.AssemblyLoad += CurrentDomain_AssemblyLoad;
             host.Start();
+
+            Log.CloseAndFlush();
         }
 
         private static void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
@@ -49,7 +58,7 @@
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             var identity = WindowsIdentity.GetCurrent() as IIdentity;
-            var ceh = new CustomErrorHandler();
+            var ceh = new SerilogErrorHandler();
             ceh.Execute(SharedSettings.GetEmailAdres(),
                 new Exception($"Identity: {identity.Name}\r\nexception type: {e.GetType()}\r\nMessage: {e.Exception.Message}", e.Exception));
             ceh = null;

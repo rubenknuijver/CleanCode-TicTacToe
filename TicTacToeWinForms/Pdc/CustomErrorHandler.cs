@@ -1,16 +1,13 @@
-﻿using System;
+﻿using Serilog;
+using System;
 
 namespace TicTacToeWinForms.Pdc
 {
-    public class CustomErrorHandler
+    public class SerilogErrorHandler
     {
-        public CustomErrorHandler()
-        {
-        }
-
         public void Execute(string emailAddress, Exception exception)
         {
-            Console.WriteLine(exception.Message);
+            Log.Error(exception, "Something went wrong");
         }
     }
 }
