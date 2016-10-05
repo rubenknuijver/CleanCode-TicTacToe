@@ -6,7 +6,7 @@
     using Pdc;
     using Styx.Diagnostics;
 
-    public class PlayerItem : BusinessObjectBase
+    public class PlayerItem : NotificationObjectBase
     {
         private bool _isCpu;
         private string _name;

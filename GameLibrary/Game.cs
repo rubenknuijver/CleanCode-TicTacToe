@@ -14,7 +14,7 @@
     public class Game
     {
         private BindingList<Players.Player> _players = new BindingList<Players.Player>();
-        private BindingList<GameRound> _previousRounds = new BindingList<GameRound>();
+        private BindingList<GameLibrary.Rounds.GameRound> _previousRounds = new BindingList<GameLibrary.Rounds.GameRound>();
         private HashSet<GameRule> _gameRules = new HashSet<GameRule>();
 
         /// <summary>
@@ -23,7 +23,7 @@
         /// <param name="board">To play the game we need a Board <see cref="GameBoard"/></param>
         /// <param name="maxPlayers">Maximum number of Players</param>
         /// <param name="maxRounds">Maximum number of GameRounds</param>
-        public Game(IBus bus, GameBoard board, int maxPlayers = 2, int maxRounds = 3)
+        public Game(GameLibrary.Messaging.IBus bus, GameBoard board, int maxPlayers = 2, int maxRounds = 3)
         {
             Argument.ThrowIfNull(bus, nameof(bus));
             Argument.Validate(maxPlayers >= 0, nameof(maxPlayers));
@@ -35,14 +35,14 @@
             this.Board = board;
         }
 
-        public IBus Bus { get; }
+        public GameLibrary.Messaging.IBus Bus { get; }
 
         public GameBoard Board { get; }
 
         /// <summary>
         /// Gets or sets the currently active GameRound.
         /// </summary>
-        public GameRound CurrentGameRound
+        public GameLibrary.Rounds.GameRound CurrentGameRound
         {
             get;
             protected set;
@@ -59,7 +59,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public BindingList<GameRound> PreviousRounds
+        public BindingList<GameLibrary.Rounds.GameRound> PreviousRounds
         {
             get { return this._previousRounds; }
         }
@@ -82,7 +82,7 @@
         public bool IsReadyForAction => !this.CanRegisterPlayers || this.CurrentGameRound != null;
 
         /// <summary>
-        /// Gets a value indicating whether 
+        /// Gets a value indicating whether
         /// </summary>
         /// <returns></returns>
         public bool CanRegisterPlayers => this._players.Count < this.MaxPlayers;
@@ -134,7 +134,7 @@
             this.Reset(false);
 
             if (this.IsReadyForAction) {
-                this.CurrentGameRound = new GameRound(this.Bus, this.Board, this.Players);
+                this.CurrentGameRound = new GameLibrary.Rounds.GameRound(this.Bus, this.Board, this.Players);
                 return true;
             }
 

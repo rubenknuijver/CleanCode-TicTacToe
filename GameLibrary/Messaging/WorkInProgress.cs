@@ -9,12 +9,12 @@
 
     public class HandlerBase
     {
-        public HandlerBase(IBus eventBus)
+        public HandlerBase(GameLibrary.Messaging.IBus eventBus)
         {
             EventBus = eventBus;
         }
 
-        protected IBus EventBus { get; }
+        protected GameLibrary.Messaging.IBus EventBus { get; }
     }
 
     public interface ICommandBus
@@ -32,7 +32,7 @@
     /// Command is used to decouple the aggregate service.
     /// One command MUST be handle by one method.
     /// </summary>
-    public interface ICommand
+    public interface ICommand:IMessage
     {
     }
 

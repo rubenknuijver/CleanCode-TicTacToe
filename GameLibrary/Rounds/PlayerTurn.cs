@@ -1,11 +1,10 @@
-namespace GameLibrary
+namespace GameLibrary.Rounds
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Players;
-    using Utils;
     using Board;
+    using Players;
 
     /// <summary>
     /// The Game rounds are played in turns

@@ -1,4 +1,4 @@
-namespace GameLibrary
+namespace GameLibrary.Rounds
 {
     using System;
     using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace GameLibrary
     public class GameRound
     {
         private readonly GameBoard _board;
-        private readonly IBus _bus;
+        private readonly GameLibrary.Messaging.IBus _bus;
         private readonly RoundRobinList<Player> _players;
 
         private IPlayerTurn _currentTurn;
@@ -27,7 +27,7 @@ namespace GameLibrary
         /// <param name="bus">Event Message Bus</param>
         /// <param name="board">The board we play on</param>
         /// <param name="players">Selected player for this round</param>
-        public GameRound(IBus bus, GameBoard board, params Player[] players)
+        public GameRound(GameLibrary.Messaging.IBus bus, GameBoard board, params Player[] players)
             : this(bus, board, players.AsEnumerable())
         {
         }
@@ -38,7 +38,7 @@ namespace GameLibrary
         /// <param name="bus">Event Message Bus</param>
         /// <param name="board">The board we play on</param>
         /// <param name="players">Selected player for this round</param>
-        public GameRound(IBus bus, GameBoard board, IEnumerable<Player> players)
+        public GameRound(GameLibrary.Messaging.IBus bus, GameBoard board, IEnumerable<Player> players)
         {
             Argument.ThrowIfNull(bus, nameof(bus));
             Argument.ThrowIfNull(board, nameof(board));
@@ -114,7 +114,7 @@ namespace GameLibrary
                 }
 
                 this._currentTurn = value;
-                this._bus.RaiseEvent(new TurnChangedEvent(this));
+                this._bus.RaiseEvent(new Messaging.Events.GameRoundTurnChanged(this));
             }
         }
 
@@ -134,7 +134,7 @@ namespace GameLibrary
                 }
 
                 this._isCompleted = value;
-                this._bus.RaiseEvent(new RoundCompletedEvent(this));
+                this._bus.RaiseEvent(new Messaging.Events.GameRoundCompleted(this));
             }
         }
 
@@ -155,7 +155,7 @@ namespace GameLibrary
                 }
 
                 this._winner = value;
-                this._bus.RaiseEvent(new RoundWinnerEvent(this));
+                this._bus.RaiseEvent(new Messaging.Events.GameRoundWinnerAnnounced(this));
                 this.End();
             }
         }

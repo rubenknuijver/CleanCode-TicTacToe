@@ -66,12 +66,12 @@
 
     public abstract class GameRule
     {
-        public abstract void Handle(GameBoard board, GameRound round);
+        public abstract void Handle(GameBoard board, GameLibrary.Rounds.GameRound round);
     }
 
     public class TicTacToe_CanStillTakeTurnsRule : GameRule
     {
-        public override void Handle(GameBoard board, GameRound round)
+        public override void Handle(GameBoard board, GameLibrary.Rounds.GameRound round)
         {
             if (board.All(p => !p.IsEmpty)) {
                 round.End();
@@ -81,7 +81,7 @@
 
     public class TicTacToe_WinningMoveRule : GameRule
     {
-        public override void Handle(GameBoard board, GameRound round)
+        public override void Handle(GameBoard board, GameLibrary.Rounds.GameRound round)
         {
             round.SetWinner(TicTacToe.DoWeHaveAWinner(board.ToArray()));
         }

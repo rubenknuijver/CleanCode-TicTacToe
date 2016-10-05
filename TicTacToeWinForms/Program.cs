@@ -22,7 +22,7 @@
                 .WriteTo.LiterateConsole()
                 .CreateLogger();
 
-            // Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
+            Application.ThreadException += Application_ThreadException;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -59,8 +59,7 @@
         {
             var identity = WindowsIdentity.GetCurrent() as IIdentity;
             var ceh = new SerilogErrorHandler();
-            ceh.Execute(SharedSettings.GetEmailAdres(),
-                new Exception($"Identity: {identity.Name}\r\nexception type: {e.GetType()}\r\nMessage: {e.Exception.Message}", e.Exception));
+            ceh.Execute(SharedSettings.GetEmailAdres(), new Exception($"Identity: {identity.Name}\r\nexception type: {e.GetType()}\r\nMessage: {e.Exception.Message}", e.Exception));
             ceh = null;
         }
     }

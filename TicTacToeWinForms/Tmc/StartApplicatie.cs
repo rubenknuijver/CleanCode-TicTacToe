@@ -1,7 +1,11 @@
-﻿namespace TicTacToeWinForms.Tmc
+﻿using GameLibrary.Messaging;
+using GameLibrary.Messaging.Events;
+using GameLibrary.Utils;
+namespace TicTacToeWinForms.Tmc
 {
     using GameLibrary;
     using GameLibrary.Board;
+    using Pdc;
     using System;
     using System.Linq;
     using System.Windows.Forms;
@@ -46,45 +50,44 @@
         {
             OnInitializing();
 
-            //try {
-            var board = new GameBoard(3, 3);
-            _game = new Game(new InMemoryBus(), board, 2, 3);
-            _game.Rules.Add(new GameLibrary.Utils.TicTacToe_WinningMoveRule());
-            _game.Rules.Add(new GameLibrary.Utils.TicTacToe_CanStillTakeTurnsRule());
-            _game.Bus.RegisterHandler(new GenericEventHandler<RoundWinnerEvent>(e => {
-                if (MessageBox.Show($"And the winner is.. {e.Round.Winner.Name}", "Game Winner", MessageBoxButtons.OK) == DialogResult.OK) {
-                                        
+            try {
+                var board = new GameBoard(3, 3);
+                _game = new Game(new InMemoryBus(), board, 2, 3);
+                _game.Rules.Add(new TicTacToe_WinningMoveRule());
+                _game.Rules.Add(new TicTacToe_CanStillTakeTurnsRule());
+                _game.Bus.RegisterHandler(new GenericEventHandler<GameRoundWinnerAnnounced>(e => {
+                    if (MessageBox.Show($"And the winner is.. {e.Round.Winner.Name}", "Game Winner", MessageBoxButtons.OK) == DialogResult.OK) {
+
+                    }
+                }));
+
+                _game.Bus.RegisterHandler(new GenericEventHandler<GameRoundCompleted>(e => {
+                    if (e.Round.Winner == null) {
+                        MessageBox.Show($"It's a draw...");
+                    }
+                    if (_game.MaxRounds <= _game.PreviousRounds.Count) {
+
+                    }
+                }));
+
+                board.Initialize();
+
+                using (_mainWindow = new MainWindow()) {
+
+                    InitForm(_mainWindow);
+
+                    System.Threading.Thread.Sleep(1000);
+                    OnBeforeRunning();
+
+                    _startTime = DateTime.Now;
+                    _mainWindow.ShowDialog();
                 }
-            }));
-
-            _game.Bus.RegisterHandler(new GenericEventHandler<RoundCompletedEvent>(e => {
-                if(e.Round.Winner == null) {
-                    MessageBox.Show($"It's a draw...");
-                }
-                if (_game.MaxRounds <= _game.PreviousRounds.Count) {
-
-                }
-            }));
-
-            board.Initialize();
-
-            using (_mainWindow = new MainWindow()) {
-
-                InitForm(_mainWindow);
-
-                System.Threading.Thread.Sleep(1000);
-                OnBeforeRunning();
-
-                _startTime = DateTime.Now;
-                _mainWindow.ShowDialog();
             }
-            /*  }
-              catch (Exception ex) {
-                  var ceh = new CustomErrorHandler();
-                  ceh.Execute(SharedSettings.GetEmailAdres(), ex);
-                  ceh = null;
-              }
-              */
+            catch (Exception ex) {
+                var ceh = new SerilogErrorHandler();
+                ceh.Execute(SharedSettings.GetEmailAdres(), ex);
+                ceh = null;
+            }
         }
 
         private void InitForm(MainWindow form)
@@ -95,9 +98,9 @@
                 form.RegisterClosingAction(ApplicationClosing);
                 form.RegisterPlayerConfigurationAction(PlayerConfiguration);
                 form.SetupGameBindings(_game);
-                    
-                var v = form.FindControlBy<Control>(f => f.Tag != null, true);
-                Array.ForEach(v.Select(s => s.Tag).ToArray(), (a) => System.Diagnostics.Debug.WriteLine(a));
+
+                //var v = form.FindControlBy<Control>(f => f.Tag != null, true);
+                //Array.ForEach(v.Select(s => s.Tag).ToArray(), (a) => System.Diagnostics.Debug.WriteLine(a));
 
                 _gameBoardAgent = new BoardAgent(_game, form.panelGrid);
                 _gameBoardAgent.Prepare();
@@ -119,7 +122,7 @@
                     _game.PrepareGameRound();
                     _gameBoardAgent.Prepare();
 
-                    if(!_game.CurrentGameRound.HasStarted) {
+                    if (!_game.CurrentGameRound.HasStarted) {
                         _game.CurrentGameRound.Start();
                     }
                 });

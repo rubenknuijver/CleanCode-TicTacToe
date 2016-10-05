@@ -16,7 +16,7 @@ namespace GameLibrary.Tests
         public void Can_Register_Player()
         {
             var board = new Board.GameBoard(3, 3);
-            Game game = new Game(new InMemoryBus(),board, 2);
+            Game game = new Game(new GameLibrary.Messaging.InMemoryBus(),board, 2);
 
             game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
             game.RegisterPlayer(new Players.ArtificialIntelligencePlayer());
@@ -29,7 +29,7 @@ namespace GameLibrary.Tests
         public void Register_Player_Throws_On_PlayerMaximum()
         {
             var board = new Board.GameBoard(3, 3);
-            Game game = new Game(new InMemoryBus(), board, 2);
+            Game game = new Game(new GameLibrary.Messaging.InMemoryBus(), board, 2);
 
             game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
             game.RegisterPlayer(new Players.ArtificialIntelligencePlayer());
@@ -44,7 +44,7 @@ namespace GameLibrary.Tests
         public void Register_Player_Throws_On_DuplicatePlayer()
         {
             var board = new Board.GameBoard(3, 3);
-            Game game = new Game(new InMemoryBus(), board, 2);
+            Game game = new Game(new GameLibrary.Messaging.InMemoryBus(), board, 2);
 
             game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
 

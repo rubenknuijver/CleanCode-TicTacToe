@@ -1,4 +1,4 @@
-namespace GameLibrary
+namespace GameLibrary.Rounds
 {
     using System;
     using System.Collections.Generic;

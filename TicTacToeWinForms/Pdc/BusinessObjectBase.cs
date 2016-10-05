@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    public class BusinessObjectBase : INotifyPropertyChanged
+    public class NotificationObjectBase : INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;

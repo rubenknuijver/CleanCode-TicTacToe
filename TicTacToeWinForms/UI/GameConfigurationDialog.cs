@@ -14,7 +14,7 @@
             InitializeComponent();
 
             if (DesignMode) {
-                propertyGrid1.SelectedObject = new Game(new InMemoryBus(), new GameLibrary.Board.GameBoard(3, 3));
+                propertyGrid1.SelectedObject = new Game(new GameLibrary.Messaging.InMemoryBus(), new GameLibrary.Board.GameBoard(3, 3));
             }
             else {
                 propertyGrid1.SelectedObject = game;

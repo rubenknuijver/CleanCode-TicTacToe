@@ -31,9 +31,9 @@ namespace TicTacToeWinForms.UI
         {
             this.components = new System.ComponentModel.Container();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.labelGameStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.labelGameTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.labelGameRound = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelGrid = new System.Windows.Forms.Panel();
             this.btnConfigPlayers = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -51,9 +51,9 @@ namespace TicTacToeWinForms.UI
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2,
-            this.toolStripStatusLabel3});
+            this.labelGameStatus,
+            this.labelGameTime,
+            this.labelGameRound});
             this.statusStrip1.Location = new System.Drawing.Point(0, 419);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(624, 22);
@@ -61,26 +61,26 @@ namespace TicTacToeWinForms.UI
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // labelGameStatus
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(509, 17);
-            this.toolStripStatusLabel1.Spring = true;
-            this.toolStripStatusLabel1.Text = "ready.";
-            this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelGameStatus.Name = "labelGameStatus";
+            this.labelGameStatus.Size = new System.Drawing.Size(478, 17);
+            this.labelGameStatus.Spring = true;
+            this.labelGameStatus.Text = "ready.";
+            this.labelGameStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // toolStripStatusLabel2
+            // labelGameTime
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(49, 17);
-            this.toolStripStatusLabel2.Text = "00:00:00";
+            this.labelGameTime.Name = "labelGameTime";
+            this.labelGameTime.Size = new System.Drawing.Size(49, 17);
+            this.labelGameTime.Text = "00:00:00";
             // 
-            // toolStripStatusLabel3
+            // labelGameRound
             // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(51, 17);
-            this.toolStripStatusLabel3.Tag = "CurrentRoundDisplay";
-            this.toolStripStatusLabel3.Text = "Round 0";
+            this.labelGameRound.Name = "labelGameRound";
+            this.labelGameRound.Size = new System.Drawing.Size(51, 17);
+            this.labelGameRound.Tag = "CurrentRoundDisplay";
+            this.labelGameRound.Text = "Round 0";
             // 
             // panelGrid
             // 
@@ -209,15 +209,15 @@ namespace TicTacToeWinForms.UI
         #endregion
 
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel labelGameStatus;
+        private System.Windows.Forms.ToolStripStatusLabel labelGameTime;
         public System.Windows.Forms.Button btnConfigPlayers;
         private System.Windows.Forms.ImageList imageList1;
         public System.Windows.Forms.Panel panelGrid;
         public GamePlayerListBox playerList;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonStartStop;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel labelGameRound;
         private System.Windows.Forms.Panel panelSettings;
         public System.Windows.Forms.NumericUpDown gameRounds;
         private System.Windows.Forms.Button buttonResetBoard;

@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,7 +54,18 @@
     <Compile Include="Board\BoardCoordinate.cs" />
     <Compile Include="Board\Cell.cs" />
     <Compile Include="Board\GameBoard.cs" />
+    <Compile Include="Board\GameBoardCommandHandlers.cs" />
     <Compile Include="Board\GameBoardExtensions.cs" />
+    <Compile Include="GameCommandHandlers.cs" />
+    <Compile Include="Messaging\ICommandSender.cs" />
+    <Compile Include="Messaging\IEventRaiser.cs" />
+    <Compile Include="Rounds\GameRoundCommandHandlers.cs" />
+    <Compile Include="Messaging\Command.cs" />
+    <Compile Include="Messaging\Commands\PlayerTakesTurn.cs" />
+    <Compile Include="Messaging\Event.cs" />
+    <Compile Include="Messaging\IHandler.cs" />
+    <Compile Include="Messaging\IMessage.cs" />
+    <Compile Include="Messaging\InMemoryBus.cs" />
     <Compile Include="Messaging\WorkInProgress.cs" />
     <Compile Include="Messaging\GenericEventHandler.cs" />
     <Compile Include="Exceptions\DuplicatePlayerException.cs" />
@@ -63,21 +75,19 @@
     <Compile Include="Players\Input\IInputEvent.cs" />
     <Compile Include="Players\Input\IInputHandler.cs" />
     <Compile Include="Exceptions\PlayerMaximumExcededException.cs" />
-    <Compile Include="PlayerTurn.cs" />
+    <Compile Include="Rounds\PlayerTurn.cs" />
     <Compile Include="Players\ArtificialIntelligencePlayer.cs" />
     <Compile Include="Players\HumanPlayer.cs" />
     <Compile Include="Players\PlayerSymbol.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="GameRound.cs" />
+    <Compile Include="Rounds\GameRound.cs" />
     <Compile Include="Players\Player.cs" />
-    <Compile Include="IPlayerTurn.cs" />
+    <Compile Include="Rounds\IPlayerTurn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Messaging\TurnChangedEvent.cs" />
-    <Compile Include="Messaging\RoundCompletedEvent.cs" />
-    <Compile Include="Messaging\RoundWinnerEvent.cs" />
+    <Compile Include="Messaging\Events\TurnChangedEvent.cs" />
+    <Compile Include="Messaging\Events\GameRoundCompleted.cs" />
+    <Compile Include="Messaging\Events\GameRoundWinnerAnnounced.cs" />
     <Compile Include="Utils\RoundRobinList`1.cs" />
-    <Compile Include="Utils\CommandManager.cs" />
-    <Compile Include="Utils\ICommand.cs" />
     <Compile Include="Utils\TicTacToe.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +101,7 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

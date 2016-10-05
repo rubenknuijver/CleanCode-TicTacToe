@@ -1,13 +1,11 @@
-﻿using System;
-using GameLibrary;
-
-namespace TicTacToeWinForms.UI
+﻿namespace TicTacToeWinForms.UI
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Forms;
+    using GameLibrary;
 
     public partial class MainWindow : Form
     {
@@ -35,7 +33,7 @@ namespace TicTacToeWinForms.UI
 
         public void SetStatusText(string text)
         {
-            this.toolStripStatusLabel1.Text = text;
+            this.labelGameStatus.Text = text;
         }
 
         public void SetStatusTime(TimeSpan time)
@@ -49,7 +47,7 @@ namespace TicTacToeWinForms.UI
                 this.Invoke(method, time);
             }
 
-            this.toolStripStatusLabel2.Text = time.ToString(@"hh\:mm\:ss");
+            this.labelGameTime.Text = time.ToString(@"hh\:mm\:ss");
         }
 
         public void RegisterStartGameAction(Action action)
