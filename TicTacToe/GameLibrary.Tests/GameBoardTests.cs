@@ -18,7 +18,7 @@ namespace GameLibrary.Tests
         [TestMethod]
         public void Should_fail_without_initialization()
         {
-            GameBoard board = new GameBoard(3, 3);
+            GameBoard board = new GameBoard(new BoardSize(3, 3));
 
             var pos = new BoardCoordinate(1, 1);
 
@@ -34,7 +34,7 @@ namespace GameLibrary.Tests
         [TestMethod]
         public void Can_Tell_If_All_Cells_Are_Empty()
         {
-            GameBoard board = new GameBoard(3, 3);
+            GameBoard board = new GameBoard(new BoardSize(3, 3));
             board.Initialize();
 
             int cellsThatAreNotTaken = board.AsEnumerable()
@@ -47,10 +47,10 @@ namespace GameLibrary.Tests
         [TestMethod]
         public void Should_Exclude_Spaces_Taken_From_EmptyCells()
         {
-            GameBoard board = new GameBoard(3, 3);
+            GameBoard board = new GameBoard(new BoardSize(3, 3));
             board.Initialize();
 
-            board[new BoardCoordinate(2, 2)].Occupant = new Players.HumanPlayer("John Dow");
+            board[new BoardCoordinate(2, 2)].Occupant = new HumanPlayer("John Dow");
 
             int cellsThatAreNotTaken = board.AsEnumerable()
                 .Empty()
@@ -64,24 +64,24 @@ namespace GameLibrary.Tests
         [TestMethod]
         public void Coordinate_Should_Away_be_on_the_board()
         {
-            GameBoard board = new GameBoard(3, 3);
+            GameBoard board = new GameBoard(new BoardSize(3, 3));
             board.Initialize();
 
             ExtendedAssert.Throws<ArgumentOutOfRangeException>(() => {
-                board.OccupyCell(new Players.HumanPlayer("Donnie"), new BoardCoordinate(10, 10));
+                board.OccupyCell(new HumanPlayer("Donnie"), new BoardCoordinate(10, 10));
             });
         }
 
         [TestMethod]
         public void GameOver_if_no_empty_cells_are_left()
         {
-            GameBoard board = new GameBoard(3, 3);
+            GameBoard board = new GameBoard(new BoardSize(3, 3));
             //board.LoadFromHistory();
 
             board.Initialize();
 
             for (int i = 0; i <= 7; i++) {
-                var player = new Players.ArtificialIntelligencePlayer();
+                var player = new ArtificialIntelligencePlayer();
 
                 var pos = BoardCoordinate.FromBoardIndex(board, i);
                 board.OccupyCell(player, pos);
@@ -93,7 +93,7 @@ namespace GameLibrary.Tests
             }
 
             {
-                var player = new Players.ArtificialIntelligencePlayer();
+                var player = new ArtificialIntelligencePlayer();
                 var pos = BoardCoordinate.FromBoardIndex(board, 8);
                 board.OccupyCell(player, pos);
 
@@ -107,9 +107,9 @@ namespace GameLibrary.Tests
         [TestMethod]
         public void GameOver_if_all_winning_combination_are_taken()
         {
-            var player = new Players.HumanPlayer("Donnie");
+            var player = new HumanPlayer("Donnie");
 
-            GameBoard board = new GameBoard(3, 3);
+            GameBoard board = new GameBoard(new BoardSize(3, 3));
             //board.LoadFromHistory();
 
             foreach (var winner in WinningSets()) {
@@ -129,9 +129,9 @@ namespace GameLibrary.Tests
         [TestMethod]
         public void And_the_winner_is()
         {
-            var player = new Players.HumanPlayer("Donnie");
+            var player = new HumanPlayer("Donnie");
 
-            GameBoard board = new GameBoard(3, 3);
+            GameBoard board = new GameBoard(new BoardSize(3, 3));
             //board.LoadFromHistory();
 
             foreach (var winningCombination in WinningSets()) {

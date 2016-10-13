@@ -1,8 +1,8 @@
 ﻿namespace GameLibrary.Board
 {
     using System;
-    using System.Linq;
     using System.Diagnostics;
+    using System.Linq;
     using Styx.Diagnostics;
 
     /// <summary>Provides the base class for value types.</summary>
@@ -14,8 +14,8 @@
         /// Initializes a new instance of the <see cref="BoardCoordinate"/> struct.
         /// Coordinate point on the GameBoard
         /// </summary>
-        /// <param name="x">Column or X prostion</param>
-        /// <param name="y">Row or Y postion</param>
+        /// <param name="x">Column or X position</param>
+        /// <param name="y">Row or Y position</param>
         public BoardCoordinate(int x, int y)
         {
             Argument.Validate(x >= 0, nameof(x));
@@ -26,12 +26,12 @@
         }
 
         /// <summary>
-        /// Gets column or X postion
+        /// Gets column or X position
         /// </summary>
         public int X { get; }
 
         /// <summary>
-        /// Gets Row or Y postion
+        /// Gets Row or Y position
         /// </summary>
         public int Y { get; }
 
@@ -46,12 +46,12 @@
             Argument.ThrowIfNull(board, nameof(board));
             Argument.Validate(index >= 0, nameof(index));
 
-            if (!IsValidDimention(index , board.RowSize * board.ColumnSize)) {
+            if (!IsValidDimention(index , board.Size.Rows * board.Size.Columns)) {
                 throw new IndexOutOfRangeException(nameof(index));
             }
 
-            var rows = index / board.ColumnSize;
-            var columns = index % board.ColumnSize;
+            var rows = index / board.Size.Columns;
+            var columns = index % board.Size.Columns;
 
             return new BoardCoordinate(columns, rows);
         }
@@ -59,25 +59,23 @@
         /// <summary>
         /// Translate matrix Coordinate to array index position within matrix bounds
         /// </summary>
-        /// <param name="rowSize">row size</param>
-        /// <param name="colSize">column size</param>
+        /// <param name="boardSize">Dimension</param>
         /// <returns>index value</returns>
-        public int Position(int rowSize, int colSize)
+        public int Position(BoardSize boardSize)
         {
-            Argument.Validate(colSize >= 0, nameof(colSize));
-            Argument.Validate(rowSize >= 0, nameof(rowSize));
+            Argument.ThrowIfNull(boardSize, nameof(boardSize));
 
-            int x = this.X % colSize;
-            int y = this.Y % rowSize;
-            return (y * colSize) + x;
+            int x = this.X % boardSize.Columns;
+            int y = this.Y % boardSize.Rows;
+            return (y * boardSize.Columns) + x;
         }
 
         /// <summary>
-        /// Determains if the coordiante is on the <see cref="GameBoard"/>
+        /// Determines if the coordinate is on the <see cref="GameBoard"/>
         /// </summary>
-        /// <param name="board"><see cref="GameBoard"/></param>
-        /// <returns>true it is on the <see cref="GameBoard"/></returns>
-        public bool IsOnGameBoard(GameBoard board) => IsValidDimention(this.X, board.ColumnSize) && IsValidDimention(this.Y, board.RowSize);
+        /// <param name="boardSize"><see cref="BoardSize"/></param>
+        /// <returns>true it is on the <see cref="BoardSize"/></returns>
+        public bool IsOnGameBoard(BoardSize boardSize) => IsValidDimention(this.X, boardSize.Columns) && IsValidDimention(this.Y, boardSize.Rows);
 
         private static bool IsValidDimention(int pos, int dimention) => pos >= 0 && pos < dimention;
     }

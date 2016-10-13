@@ -17,6 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{A91E40B4-226
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeWinForms", "TicTacToeWinForms\TicTacToeWinForms.csproj", "{61AB9AFA-3EED-465C-8597-9489617DAAAF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C895471D-97CB-4CC9-B17B-94EEFC1E7E1A}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.MD = ..\README.MD
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -56,6 +56,7 @@
     <Compile Include="Board\GameBoard.cs" />
     <Compile Include="Board\GameBoardCommandHandlers.cs" />
     <Compile Include="Board\GameBoardExtensions.cs" />
+    <Compile Include="Board\Size.cs" />
     <Compile Include="GameCommandHandlers.cs" />
     <Compile Include="Messaging\ICommandSender.cs" />
     <Compile Include="Messaging\IEventRaiser.cs" />
@@ -87,8 +88,11 @@
     <Compile Include="Messaging\Events\TurnChangedEvent.cs" />
     <Compile Include="Messaging\Events\GameRoundCompleted.cs" />
     <Compile Include="Messaging\Events\GameRoundWinnerAnnounced.cs" />
+    <Compile Include="Utils\GameRule.cs" />
     <Compile Include="Utils\RoundRobinList`1.cs" />
     <Compile Include="Utils\TicTacToe.cs" />
+    <Compile Include="Utils\TicTacToe_CanStillTakeTurnsRule.cs" />
+    <Compile Include="Utils\TicTacToe_WinningMoveRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameLibrary.ruleset" />

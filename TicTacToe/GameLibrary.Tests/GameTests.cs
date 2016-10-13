@@ -1,4 +1,5 @@
 ﻿using GameLibrary;
+using GameLibrary.Board;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,8 @@ namespace GameLibrary.Tests
         [TestMethod]
         public void Can_Register_Player()
         {
-            var board = new Board.GameBoard(3, 3);
-            Game game = new Game(new GameLibrary.Messaging.InMemoryBus(),board, 2);
+            var board = new Board.GameBoard(new BoardSize(3, 3));
+            Game game = new Game(new Messaging.InMemoryBus(),board, 2);
 
             game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
             game.RegisterPlayer(new Players.ArtificialIntelligencePlayer());
@@ -28,8 +29,8 @@ namespace GameLibrary.Tests
         //[ExpectedException(typeof(PlayerMaximumException))]
         public void Register_Player_Throws_On_PlayerMaximum()
         {
-            var board = new Board.GameBoard(3, 3);
-            Game game = new Game(new GameLibrary.Messaging.InMemoryBus(), board, 2);
+            var board = new Board.GameBoard(new BoardSize(3, 3));
+            Game game = new Game(new Messaging.InMemoryBus(), board, 2);
 
             game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
             game.RegisterPlayer(new Players.ArtificialIntelligencePlayer());
@@ -43,8 +44,8 @@ namespace GameLibrary.Tests
         //[ExpectedException(typeof(DuplicatePlayerException))]
         public void Register_Player_Throws_On_DuplicatePlayer()
         {
-            var board = new Board.GameBoard(3, 3);
-            Game game = new Game(new GameLibrary.Messaging.InMemoryBus(), board, 2);
+            var board = new Board.GameBoard(new BoardSize(3, 3));
+            Game game = new Game(new Messaging.InMemoryBus(), board, 2);
 
             game.RegisterPlayer(new Players.HumanPlayer("John Dow"));
 

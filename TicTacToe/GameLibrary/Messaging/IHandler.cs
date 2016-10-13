@@ -10,7 +10,7 @@ namespace GameLibrary.Messaging
         /// <summary>
         /// Handle the Event
         /// </summary>
-        /// <param name="@event"></param>
-        void Handle(T @event);
+        /// <param name="message"></param>
+        void Handle(T message);
     }
 }

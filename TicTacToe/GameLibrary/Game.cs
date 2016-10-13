@@ -5,6 +5,8 @@
     using System.ComponentModel;
     using System.Linq;
     using Board;
+    using Messaging;
+    using Rounds;
     using Styx.Diagnostics;
     using Utils;
 
@@ -14,7 +16,7 @@
     public class Game
     {
         private BindingList<Players.Player> _players = new BindingList<Players.Player>();
-        private BindingList<GameLibrary.Rounds.GameRound> _previousRounds = new BindingList<GameLibrary.Rounds.GameRound>();
+        private BindingList<GameRound> _previousRounds = new BindingList<GameRound>();
         private HashSet<GameRule> _gameRules = new HashSet<GameRule>();
 
         /// <summary>
@@ -23,7 +25,7 @@
         /// <param name="board">To play the game we need a Board <see cref="GameBoard"/></param>
         /// <param name="maxPlayers">Maximum number of Players</param>
         /// <param name="maxRounds">Maximum number of GameRounds</param>
-        public Game(GameLibrary.Messaging.IBus bus, GameBoard board, int maxPlayers = 2, int maxRounds = 3)
+        public Game(IBus bus, GameBoard board, int maxPlayers = 2, int maxRounds = 3)
         {
             Argument.ThrowIfNull(bus, nameof(bus));
             Argument.Validate(maxPlayers >= 0, nameof(maxPlayers));
@@ -35,14 +37,14 @@
             this.Board = board;
         }
 
-        public GameLibrary.Messaging.IBus Bus { get; }
+        public IBus Bus { get; }
 
         public GameBoard Board { get; }
 
         /// <summary>
         /// Gets or sets the currently active GameRound.
         /// </summary>
-        public GameLibrary.Rounds.GameRound CurrentGameRound
+        public GameRound CurrentGameRound
         {
             get;
             protected set;
@@ -59,7 +61,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public BindingList<GameLibrary.Rounds.GameRound> PreviousRounds
+        public BindingList<GameRound> PreviousRounds
         {
             get { return this._previousRounds; }
         }
@@ -109,16 +111,22 @@
         /// <summary>
         /// Resets the game back to initial state
         /// </summary>
-        /// <param name="all">to include players and round history</param>
-        public void Reset(bool all)
+        public void Reset()
         {
-            if (all) {
-                this._players.Clear();
-                this._previousRounds.Clear();
-            }
-
             this.CurrentGameRound = null;
             this.Board.Clear();
+        }
+
+        /// <summary>
+        /// Resets the game back to initial state
+        /// and also resets players and round history
+        /// </summary>
+        public void FullReset()
+        {
+            this._players.Clear();
+            this._previousRounds.Clear();
+
+            this.Reset();
         }
 
         /// <summary>
@@ -131,10 +139,10 @@
                 this.PreviousRounds.Add(this.CurrentGameRound);
             }
 
-            this.Reset(false);
+            this.Reset();
 
             if (this.IsReadyForAction) {
-                this.CurrentGameRound = new GameLibrary.Rounds.GameRound(this.Bus, this.Board, this.Players);
+                this.CurrentGameRound = new GameRound(this.Bus, this.Board, this.Players);
                 return true;
             }
 
@@ -148,44 +156,4 @@
             }
         }
     }
-
-    /* Maybe later
-     * 
-    public class RegisterPlayerCommand
-    {
-        public RegisterPlayerCommand(Players.Player player)
-        {
-            Argument.ThrowIfNull(player, nameof(player));
-            Player = player;
-        }
-
-        public Players.Player Player { get; }
-    }
-
-    public class PlayerTakesTurnCommand
-    {
-        public PlayerTakesTurnCommand(Players.Player player, Board.BoardCoordinate coordinate )
-        {
-            Argument.ThrowIfNull(player, nameof(player));
-
-            Coordinate = coordinate;
-            Player = player;
-        }
-
-        public Players.Player Player { get; }
-        public Board.BoardCoordinate Coordinate { get;  }
-    }
-
-    public class PlayerWithdrawTurnCommand
-    {
-        public PlayerWithdrawTurnCommand(Players.Player player)
-        {
-            Argument.ThrowIfNull(player, nameof(player));
-
-            Player = player;
-        }
-
-        public Players.Player Player { get; }
-    }
-    */
 }

@@ -16,28 +16,19 @@ namespace GameLibrary.Board
         /// <summary>
         /// Initializes a new instance of the <see cref="GameBoard"/> class.
         /// </summary>
-        /// <param name="rowSize"></param>
-        /// <param name="columnSize"></param>
-        public GameBoard(int rowSize, int columnSize)
+        /// <param name="size"></param>
+        public GameBoard(BoardSize size)
         {
-            Enforce.ArgumentGreaterThanZero(rowSize, "Board can't have less than 1 row");
-            Enforce.ArgumentGreaterThanZero(columnSize, "Board can't have less than 1 column");
+            Enforce.NotNull(size);
 
-            this.ColumnSize = columnSize;
-            this.RowSize = rowSize;
-
-            this._cells = new Cell[rowSize * columnSize];
+            this.Size = size;
+            this._cells = new Cell[size];
         }
 
         /// <summary>
-        /// Gets the Row boundary size
+        /// Gets the GameBoard demential size in Rows and Columns
         /// </summary>
-        public int RowSize { get; }
-
-        /// <summary>
-        /// Gets the Column boundary size
-        /// </summary>
-        public int ColumnSize { get; }
+        public BoardSize Size { get; }
 
         /// <summary>
         /// Get or Set a cell using a BoardCoordinate
@@ -48,20 +39,20 @@ namespace GameLibrary.Board
         {
             get
             {
-                if (!coordinate.IsOnGameBoard(this)) {
+                if (!coordinate.IsOnGameBoard(this.Size)) {
                     throw ExceptionFactory.CoordinateOutOfBound(nameof(coordinate));
                 }
 
-                return this._cells[coordinate.Position(this.RowSize, this.ColumnSize)];
+                return this._cells[coordinate.Position(this.Size)];
             }
 
             set
             {
-                if (!coordinate.IsOnGameBoard(this)) {
+                if (!coordinate.IsOnGameBoard(this.Size)) {
                     throw ExceptionFactory.CoordinateOutOfBound(nameof(coordinate));
                 }
 
-                this._cells[coordinate.Position(this.RowSize, this.ColumnSize)] = value;
+                this._cells[coordinate.Position(this.Size)] = value;
             }
         }
 
@@ -71,9 +62,9 @@ namespace GameLibrary.Board
         /// <returns>matrix array of all cells</returns>
         public Cell[,] Cells()
         {
-            var ret = new Cell[this.RowSize, this.ColumnSize];
+            var ret = new Cell[this.Size.Rows, this.Size.Columns];
             for (int n = 0; n < this._cells.Length; n++) {
-                ret[n % this.RowSize, n / this.RowSize] = this._cells[n];
+                ret[n % this.Size.Rows, n / this.Size.Rows] = this._cells[n];
             }
 
             return ret;

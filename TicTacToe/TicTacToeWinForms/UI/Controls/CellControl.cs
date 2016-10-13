@@ -20,11 +20,11 @@ namespace TicTacToeWinForms.UI.Controls
             this.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
-        public void AdjustToBoard(GameBoard board)
+        public void AdjustToBoard(BoardSize boardSize)
         {
             if (this.Parent != null) {
-                this.Width = this.Parent.Width / board.ColumnSize;
-                this.Height = this.Parent.Height / board.RowSize;
+                this.Width = this.Parent.Width / boardSize.Columns;
+                this.Height = this.Parent.Height / boardSize.Rows;
             }
         }
 
@@ -83,6 +83,7 @@ namespace TicTacToeWinForms.UI.Controls
             else {
                 this.Visible = false;
             }
+
             base.OnEnabledChanged(e);
         }
 

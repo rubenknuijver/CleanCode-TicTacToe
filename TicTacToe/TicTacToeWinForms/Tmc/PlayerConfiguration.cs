@@ -46,8 +46,9 @@
 
         private void UpdatePlayersInTheGame()
         {
-            if (!_game.CanRegisterPlayers)
-                _game.Reset(true);
+            if (!_game.CanRegisterPlayers) {
+                _game.FullReset();
+            }
 
             foreach (var item in _dialog.DataSource) {
                 if (item.IsCpu) {

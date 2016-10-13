@@ -14,7 +14,7 @@ namespace GameLibrary.Rounds
     public class GameRound
     {
         private readonly GameBoard _board;
-        private readonly GameLibrary.Messaging.IBus _bus;
+        private readonly Messaging.IBus _bus;
         private readonly RoundRobinList<Player> _players;
 
         private IPlayerTurn _currentTurn;
@@ -27,7 +27,7 @@ namespace GameLibrary.Rounds
         /// <param name="bus">Event Message Bus</param>
         /// <param name="board">The board we play on</param>
         /// <param name="players">Selected player for this round</param>
-        public GameRound(GameLibrary.Messaging.IBus bus, GameBoard board, params Player[] players)
+        public GameRound(Messaging.IBus bus, GameBoard board, params Player[] players)
             : this(bus, board, players.AsEnumerable())
         {
         }
@@ -38,7 +38,7 @@ namespace GameLibrary.Rounds
         /// <param name="bus">Event Message Bus</param>
         /// <param name="board">The board we play on</param>
         /// <param name="players">Selected player for this round</param>
-        public GameRound(GameLibrary.Messaging.IBus bus, GameBoard board, IEnumerable<Player> players)
+        public GameRound(Messaging.IBus bus, GameBoard board, IEnumerable<Player> players)
         {
             Argument.ThrowIfNull(bus, nameof(bus));
             Argument.ThrowIfNull(board, nameof(board));

@@ -40,50 +40,30 @@
             return cells.All(p => !p.IsEmpty);
         }
 
+        /// <summary>
+        /// We could have winning combinations in de cell collection
+        /// </summary>
+        /// <param name="cells"></param>
+        /// <returns></returns>
         public static Players.Player DoWeHaveAWinner(Cell[] cells)
         {
+            var map = new Func<int, int, Cell>((index, pos) => cells[_matches[index, pos]]);
+
             for (int i = 0; i < cells.Length - 1; i++) {
-                int a = _matches[i, 0],
-                    b = _matches[i, 1],
-                    c = _matches[i, 2];
+                var c1 = map(i, 0);
+                var c2 = map(i, 1);
+                var c3 = map(i, 2);
 
-                Cell b1 = cells[a],
-                    b2 = cells[b],
-                    b3 = cells[c];
-
-                if (b1.IsEmpty || b2.IsEmpty || b3.IsEmpty) { // if one if blank
-                    continue;    // try another -- no need to go further
+                if (c1.IsEmpty || c2.IsEmpty || c3.IsEmpty) { // if one is blank
+                    continue;    // -- no need to go further
                 }
 
-                if (b1.Occupant == b2.Occupant && b2.Occupant == b3.Occupant) {
-                    return b1.Occupant;
+                if (c1.Occupant == c2.Occupant && c2.Occupant == c3.Occupant) {
+                    return c1.Occupant;
                 }
             }
 
             return default(Players.Player);
-        }
-    }
-
-    public abstract class GameRule
-    {
-        public abstract void Handle(GameBoard board, GameLibrary.Rounds.GameRound round);
-    }
-
-    public class TicTacToe_CanStillTakeTurnsRule : GameRule
-    {
-        public override void Handle(GameBoard board, GameLibrary.Rounds.GameRound round)
-        {
-            if (board.All(p => !p.IsEmpty)) {
-                round.End();
-            }
-        }
-    }
-
-    public class TicTacToe_WinningMoveRule : GameRule
-    {
-        public override void Handle(GameBoard board, GameLibrary.Rounds.GameRound round)
-        {
-            round.SetWinner(TicTacToe.DoWeHaveAWinner(board.ToArray()));
         }
     }
 }

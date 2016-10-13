@@ -1,14 +1,14 @@
-﻿using GameLibrary.Messaging;
-using GameLibrary.Messaging.Events;
-using GameLibrary.Utils;
-namespace TicTacToeWinForms.Tmc
+﻿namespace TicTacToeWinForms.Tmc
 {
-    using GameLibrary;
-    using GameLibrary.Board;
-    using Pdc;
     using System;
     using System.Linq;
     using System.Windows.Forms;
+    using GameLibrary;
+    using GameLibrary.Board;
+    using GameLibrary.Messaging;
+    using GameLibrary.Messaging.Events;
+    using GameLibrary.Utils;
+    using Pdc;
     using UI;
 
     public class StartApplicatie
@@ -51,7 +51,7 @@ namespace TicTacToeWinForms.Tmc
             OnInitializing();
 
             try {
-                var board = new GameBoard(3, 3);
+                var board = new GameBoard(new BoardSize(3, 3));
                 _game = new Game(new InMemoryBus(), board, 2, 3);
                 _game.Rules.Add(new TicTacToe_WinningMoveRule());
                 _game.Rules.Add(new TicTacToe_CanStillTakeTurnsRule());

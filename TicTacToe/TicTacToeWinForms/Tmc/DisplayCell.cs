@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-namespace TicTacToeWinForms.Tmc
+﻿namespace TicTacToeWinForms.Tmc
 {
     using GameLibrary.Board;
     using GameLibrary.Players;
@@ -40,7 +39,7 @@ namespace TicTacToeWinForms.Tmc
         {
             Argument.ThrowIfNull(board, nameof(board));
 
-            CellControl.AdjustToBoard(board);
+            CellControl.AdjustToBoard(board.Size);
             CellControl.MapCoordinate(_cell);
 
             CellControl.Image = CellControl.CreateEmptyImage(Color.Transparent);
